@@ -1,0 +1,1643 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>POG 2026-2027 おすすめ馬 上位50頭</title>
+    <meta name="description" content="POG 2026-2027シーズンのおすすめ馬上位50頭を、父母、基本情報、血統メモ、参考リンクつきでまとめた静的ページです。">
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f4ec;
+        --paper: #fffdf8;
+        --ink: #25221d;
+        --muted: #6d675d;
+        --line: #ddd5c7;
+        --green: #125d52;
+        --green-soft: #e4f0ed;
+        --red: #8b2f36;
+        --red-soft: #f3e5e6;
+        --blue: #254e7a;
+        --blue-soft: #e3edf5;
+        --gold: #a66f1f;
+        --shadow: 0 18px 42px rgb(47 36 22 / 12%);
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        min-width: 320px;
+        margin: 0;
+        color: var(--ink);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.75;
+        background:
+          linear-gradient(120deg, rgb(18 93 82 / 9%) 0 22%, transparent 22% 100%),
+          linear-gradient(180deg, #fffaf0 0, var(--bg) 420px, #f9f7f0 100%);
+      }
+      a { color: inherit; }
+      .site { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+      .hero { padding: 42px 0 24px; }
+      .crumb { display: inline-flex; gap: 8px; align-items: center; color: var(--green); font-size: .9rem; font-weight: 700; text-decoration: none; }
+      .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 32px; align-items: end; margin-top: 28px; }
+      .eyebrow { margin: 0 0 12px; color: var(--gold); font-size: .82rem; font-weight: 800; letter-spacing: .08em; }
+      h1 { max-width: 780px; margin: 0; font-size: clamp(2.1rem, 6vw, 4.7rem); line-height: 1.04; letter-spacing: 0; }
+      .lead { max-width: 720px; margin: 20px 0 0; color: var(--muted); font-size: clamp(1rem, 1.8vw, 1.12rem); }
+      .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .stat { padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: rgb(255 253 248 / 82%); box-shadow: 0 8px 24px rgb(47 36 22 / 8%); }
+      .stat strong { display: block; font-size: 2rem; line-height: 1; }
+      .stat span { display: block; margin-top: 6px; color: var(--muted); font-size: .86rem; }
+      .toolbar-wrap { position: sticky; top: 0; z-index: 10; border-block: 1px solid rgb(221 213 199 / 90%); background: rgb(247 244 236 / 94%); backdrop-filter: blur(10px); }
+      .toolbar { display: grid; grid-template-columns: 1.1fr 1fr auto; gap: 12px; align-items: center; padding: 14px 0; }
+      label { display: grid; gap: 4px; color: var(--muted); font-size: .78rem; font-weight: 700; }
+      select, input { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; background: var(--paper); color: var(--ink); font: inherit; }
+      select:focus, input:focus, button:focus-visible, a:focus-visible { outline: 3px solid rgb(18 93 82 / 22%); outline-offset: 2px; }
+      .control-buttons { display: flex; gap: 8px; align-self: end; }
+      button { min-height: 44px; border: 1px solid rgb(18 93 82 / 24%); border-radius: 8px; padding: 8px 13px; background: var(--green); color: white; font: inherit; font-weight: 800; cursor: pointer; }
+      button.secondary { background: var(--paper); color: var(--green); }
+      .quick-nav { display: flex; gap: 8px; overflow-x: auto; padding: 12px 0 16px; scrollbar-width: thin; }
+      .quick-chip { flex: 0 0 auto; min-height: 36px; border-color: var(--line); background: var(--paper); color: var(--ink); font-size: .88rem; }
+      .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 28px; align-items: start; padding: 30px 0 56px; }
+      .index-panel { position: sticky; top: 106px; padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: rgb(255 253 248 / 88%); box-shadow: 0 10px 26px rgb(47 36 22 / 8%); }
+      .index-panel h2, .section-title { margin: 0; font-size: 1.2rem; line-height: 1.3; }
+      .index-panel p { margin: 8px 0 14px; color: var(--muted); font-size: .9rem; }
+      .table-scroll { max-height: calc(100vh - 190px); overflow: auto; border-top: 1px solid var(--line); }
+      table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+      th, td { padding: 8px 6px; border-bottom: 1px solid rgb(221 213 199 / 72%); text-align: left; vertical-align: top; }
+      th:first-child, td:first-child { width: 42px; text-align: right; color: var(--gold); font-weight: 800; }
+      td a { color: var(--green); font-weight: 800; text-decoration: none; }
+      .cards { display: grid; gap: 18px; }
+      .horse-card { scroll-margin-top: 112px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: var(--shadow); overflow: hidden; }
+      .horse-card[hidden] { display: none; }
+      .card-head { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 16px; align-items: center; padding: 22px; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, var(--green-soft), transparent 72%); }
+      .rank-mark { display: grid; place-items: center; width: 58px; aspect-ratio: 1; border: 1px solid rgb(18 93 82 / 28%); border-radius: 50%; color: var(--green); background: var(--paper); font-size: 1.2rem; font-weight: 900; }
+      .bloodline { margin: 0 0 5px; color: var(--muted); font-size: .9rem; font-weight: 700; overflow-wrap: anywhere; }
+      h3 { margin: 0; font-size: clamp(1.35rem, 3vw, 2.15rem); line-height: 1.18; letter-spacing: 0; }
+      .fact-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
+      .fact { min-width: 0; padding: 13px 16px; border-right: 1px solid rgb(221 213 199 / 72%); border-bottom: 1px solid rgb(221 213 199 / 54%); }
+      .fact:nth-child(4n) { border-right: 0; }
+      .fact span { display: block; color: var(--muted); font-size: .76rem; font-weight: 800; }
+      .fact strong { display: block; margin-top: 3px; font-size: .95rem; line-height: 1.45; overflow-wrap: anywhere; }
+      .note-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-bottom: 1px solid var(--line); }
+      .note-grid section, .pog-note { padding: 20px 22px; }
+      .note-grid section:first-child { border-right: 1px solid var(--line); }
+      h4 { margin: 0 0 8px; color: var(--red); font-size: .93rem; line-height: 1.3; }
+      p { overflow-wrap: anywhere; }
+      .note-grid p, .pog-note p { margin: 0; color: var(--ink); font-size: .96rem; }
+      .pog-note { background: linear-gradient(180deg, #fffdf8, #fbf7ee); border-bottom: 1px solid var(--line); }
+      .refs { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 22px 20px; }
+      .ref-link { display: inline-flex; align-items: center; min-height: 34px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); background: white; font-size: .86rem; font-weight: 800; text-decoration: none; }
+      .ref-netkeiba { border-color: rgb(37 78 122 / 24%); color: var(--blue); background: var(--blue-soft); }
+      .ref-poginfo { border-color: rgb(18 93 82 / 24%); color: var(--green); background: var(--green-soft); }
+      .ref-search { border-color: rgb(139 47 54 / 22%); color: var(--red); background: var(--red-soft); }
+      .empty { display: none; padding: 26px; border: 1px dashed var(--line); border-radius: 8px; background: var(--paper); color: var(--muted); text-align: center; }
+      .empty.is-visible { display: block; }
+      .page-foot { padding: 26px 0 38px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+      .to-top { position: fixed; right: 18px; bottom: 18px; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--green); color: white; text-decoration: none; font-weight: 900; box-shadow: 0 10px 28px rgb(47 36 22 / 24%); }
+      @media (max-width: 920px) {
+        .site { width: min(100% - 28px, 1180px); }
+        .hero-grid, .layout { grid-template-columns: 1fr; }
+        .stats { grid-template-columns: repeat(4, 1fr); }
+        .index-panel { position: static; }
+        .table-scroll { max-height: 360px; }
+        .toolbar { grid-template-columns: 1fr; }
+        .control-buttons { align-self: stretch; }
+        .control-buttons button { flex: 1; }
+      }
+      @media (max-width: 640px) {
+        .hero { padding-top: 28px; }
+        .stats { grid-template-columns: repeat(2, 1fr); }
+        .stat { padding: 14px; }
+        .stat strong { font-size: 1.6rem; }
+        .card-head { grid-template-columns: 54px minmax(0, 1fr); padding: 18px; }
+        .rank-mark { width: 46px; font-size: 1rem; }
+        .fact-grid { grid-template-columns: repeat(2, 1fr); }
+        .fact:nth-child(4n) { border-right: 1px solid rgb(221 213 199 / 72%); }
+        .fact:nth-child(2n) { border-right: 0; }
+        .note-grid { grid-template-columns: 1fr; }
+        .note-grid section:first-child { border-right: 0; border-bottom: 1px solid var(--line); }
+        .note-grid section, .pog-note, .refs { padding-inline: 18px; }
+        .to-top { right: 12px; bottom: 12px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site hero" id="top">
+      <a class="crumb" href="../">&lt;- POG候補馬リスト</a>
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">POG 2026-2027 WATCH LIST</p>
+          <h1>おすすめ馬 上位50頭</h1>
+          <p class="lead">馬名、母、父、基本情報、血統メモ、参考リンクを1ページで眺められるようにまとめました。写真は表示せず、まずは読み物として追いやすい形にしています。</p>
+        </div>
+        <div class="stats" aria-label="掲載概要">
+          <div class="stat"><strong>50</strong><span>掲載頭数</span></div>
+          <div class="stat"><strong>39</strong><span>netkeiba個別リンク</span></div>
+          <div class="stat"><strong>11</strong><span>netkeiba検索リンク</span></div>
+          <div class="stat"><strong>1</strong><span>静的HTML</span></div>
+        </div>
+      </div>
+    </header>
+    <div class="toolbar-wrap">
+      <div class="site">
+        <div class="toolbar" aria-label="馬名ジャンプと検索">
+          <label>馬名でジャンプ
+            <select id="horseJump">
+              <option value="">馬を選択</option>
+              <option value="horse-01">01. ジャンゴッド</option>
+<option value="horse-02">02. エルドボルグ</option>
+<option value="horse-03">03. ソブリオ</option>
+<option value="horse-04">04. チェスティーノ</option>
+<option value="horse-05">05. ダノンダックス</option>
+<option value="horse-06">06. ラガリーガ</option>
+<option value="horse-07">07. ジョドレルバンク</option>
+<option value="horse-08">08. ダイナマイク</option>
+<option value="horse-09">09. ラッキースパークル</option>
+<option value="horse-10">10. ノイエルング</option>
+<option value="horse-11">11. レジューノワール</option>
+<option value="horse-12">12. イルリサット</option>
+<option value="horse-13">13. リボンロード</option>
+<option value="horse-14">14. シャムリベルク</option>
+<option value="horse-15">15. サンタンジェロ</option>
+<option value="horse-16">16. エクアトーレ</option>
+<option value="horse-17">17. ホウオウモノポリー</option>
+<option value="horse-18">18. ウィクフォード</option>
+<option value="horse-19">19. フィリオソラーレ</option>
+<option value="horse-20">20. ユタライト</option>
+<option value="horse-21">21. フェニックスロール</option>
+<option value="horse-22">22. マスターズボンド</option>
+<option value="horse-23">23. キューティボンド</option>
+<option value="horse-24">24. ダノンデスティニー</option>
+<option value="horse-25">25. バティック</option>
+<option value="horse-26">26. ゼビウス</option>
+<option value="horse-27">27. アドマイヤモカ</option>
+<option value="horse-28">28. タクティシアン</option>
+<option value="horse-29">29. インサイドエッジ</option>
+<option value="horse-30">30. メアグローリア</option>
+<option value="horse-31">31. ミエルモーサ</option>
+<option value="horse-32">32. シアルナーレ</option>
+<option value="horse-33">33. ベトロテンペスタ</option>
+<option value="horse-34">34. エスクアドラ</option>
+<option value="horse-35">35. ブレイクアウェイ</option>
+<option value="horse-36">36. クインアマランサスの24</option>
+<option value="horse-37">37. キラービューティの24</option>
+<option value="horse-38">38. エリカプロヴァンス</option>
+<option value="horse-39">39. ミッドナイトビズーの24</option>
+<option value="horse-40">40. ソシアルクラブの24</option>
+<option value="horse-41">41. ログポーズ</option>
+<option value="horse-42">42. ヴィルマリー</option>
+<option value="horse-43">43. ベラジオパンテーラ</option>
+<option value="horse-44">44. リリックラヴ</option>
+<option value="horse-45">45. キトゥンズクラフト</option>
+<option value="horse-46">46. コナパームス</option>
+<option value="horse-47">47. レッドインサイト</option>
+<option value="horse-48">48. ルーメンルーナエ</option>
+<option value="horse-49">49. ベルバーニア</option>
+<option value="horse-50">50. エターナルバラード</option>
+            </select>
+          </label>
+          <label>馬名・母・父で絞り込み
+            <input id="horseSearch" type="search" placeholder="例: キタサンブラック、アーモンドアイ">
+          </label>
+          <div class="control-buttons">
+            <button type="button" id="topTen">上位10頭</button>
+            <button class="secondary" type="button" id="showAll">全表示</button>
+          </div>
+        </div>
+        <div class="quick-nav" aria-label="上位10頭ショートカット">
+          <button class="quick-chip" type="button" data-target="horse-01">01 ジャンゴッド</button>
+<button class="quick-chip" type="button" data-target="horse-02">02 エルドボルグ</button>
+<button class="quick-chip" type="button" data-target="horse-03">03 ソブリオ</button>
+<button class="quick-chip" type="button" data-target="horse-04">04 チェスティーノ</button>
+<button class="quick-chip" type="button" data-target="horse-05">05 ダノンダックス</button>
+<button class="quick-chip" type="button" data-target="horse-06">06 ラガリーガ</button>
+<button class="quick-chip" type="button" data-target="horse-07">07 ジョドレルバンク</button>
+<button class="quick-chip" type="button" data-target="horse-08">08 ダイナマイク</button>
+<button class="quick-chip" type="button" data-target="horse-09">09 ラッキースパークル</button>
+<button class="quick-chip" type="button" data-target="horse-10">10 ノイエルング</button>
+        </div>
+      </div>
+    </div>
+    <main class="site layout">
+      <aside class="index-panel" aria-labelledby="ranking-title">
+        <h2 id="ranking-title">表示順一覧</h2>
+        <p>馬名を押すとカードへ移動します。スマホではこの一覧も横幅内に収まります。</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>位</th><th>馬名</th><th>母</th><th>父</th></tr></thead>
+            <tbody><tr><td>1</td><td><a href="#horse-01">ジャンゴッド</a></td><td>マーゴットディド</td><td>キタサンブラック</td></tr>
+<tr><td>2</td><td><a href="#horse-02">エルドボルグ</a></td><td>コンサートホール</td><td>キタサンブラック</td></tr>
+<tr><td>3</td><td><a href="#horse-03">ソブリオ</a></td><td>ノームコア</td><td>キタサンブラック</td></tr>
+<tr><td>4</td><td><a href="#horse-04">チェスティーノ</a></td><td>チェッキーノ</td><td>エフフォーリア</td></tr>
+<tr><td>5</td><td><a href="#horse-05">ダノンダックス</a></td><td>ヤンキーローズ</td><td>サートゥルナーリア</td></tr>
+<tr><td>6</td><td><a href="#horse-06">ラガリーガ</a></td><td>ラサルダン</td><td>キズナ</td></tr>
+<tr><td>7</td><td><a href="#horse-07">ジョドレルバンク</a></td><td>アースライズ</td><td>エフフォーリア</td></tr>
+<tr><td>8</td><td><a href="#horse-08">ダイナマイク</a></td><td>シンプリーラヴィシング</td><td>キタサンブラック</td></tr>
+<tr><td>9</td><td><a href="#horse-09">ラッキースパークル</a></td><td>ラッキーライラック</td><td>エピファネイア</td></tr>
+<tr><td>10</td><td><a href="#horse-10">ノイエルング</a></td><td>プレミアエンブレム</td><td>フィエールマン</td></tr>
+<tr><td>11</td><td><a href="#horse-11">レジューノワール</a></td><td>アーモンドアイ</td><td>キタサンブラック</td></tr>
+<tr><td>12</td><td><a href="#horse-12">イルリサット</a></td><td>アエロリット</td><td>キズナ</td></tr>
+<tr><td>13</td><td><a href="#horse-13">リボンロード</a></td><td>ジュベルアリ</td><td>リオンディーズ</td></tr>
+<tr><td>14</td><td><a href="#horse-14">シャムリベルク</a></td><td>スイススカイダイバー</td><td>エピファネイア</td></tr>
+<tr><td>15</td><td><a href="#horse-15">サンタンジェロ</a></td><td>モアナアネラ</td><td>エピファネイア</td></tr>
+<tr><td>16</td><td><a href="#horse-16">エクアトーレ</a></td><td>シャトーブランシュ</td><td>キタサンブラック</td></tr>
+<tr><td>17</td><td><a href="#horse-17">ホウオウモノポリー</a></td><td>インカーヴィル</td><td>キズナ</td></tr>
+<tr><td>18</td><td><a href="#horse-18">ウィクフォード</a></td><td>ウィクトーリア</td><td>キタサンブラック</td></tr>
+<tr><td>19</td><td><a href="#horse-19">フィリオソラーレ</a></td><td>フィリアプーラ</td><td>エピファネイア</td></tr>
+<tr><td>20</td><td><a href="#horse-20">ユタライト</a></td><td>ユナカイト</td><td>ロードカナロア</td></tr>
+<tr><td>21</td><td><a href="#horse-21">フェニックスロール</a></td><td>コスモポリタンクイーン</td><td>コントレイル</td></tr>
+<tr><td>22</td><td><a href="#horse-22">マスターズボンド</a></td><td>スクールミストレス</td><td>キズナ</td></tr>
+<tr><td>23</td><td><a href="#horse-23">キューティボンド</a></td><td>コーステッド</td><td>サートゥルナーリア</td></tr>
+<tr><td>24</td><td><a href="#horse-24">ダノンデスティニー</a></td><td>コンヴィクション２</td><td>キタサンブラック</td></tr>
+<tr><td>25</td><td><a href="#horse-25">バティック</a></td><td>カット</td><td>エピファネイア</td></tr>
+<tr><td>26</td><td><a href="#horse-26">ゼビウス</a></td><td>ビブロス</td><td>エピファネイア</td></tr>
+<tr><td>27</td><td><a href="#horse-27">アドマイヤモカ</a></td><td>アドマイヤミヤビ</td><td>モーリス</td></tr>
+<tr><td>28</td><td><a href="#horse-28">タクティシアン</a></td><td>モルジアナ</td><td>サリオス</td></tr>
+<tr><td>29</td><td><a href="#horse-29">インサイドエッジ</a></td><td>デアリングエッジ</td><td>エピファネイア</td></tr>
+<tr><td>30</td><td><a href="#horse-30">メアグローリア</a></td><td>アンティフォナ</td><td>サリオス</td></tr>
+<tr><td>31</td><td><a href="#horse-31">ミエルモーサ</a></td><td>ミスエルテ</td><td>シルバーステート</td></tr>
+<tr><td>32</td><td><a href="#horse-32">シアルナーレ</a></td><td>ストロベリームーン</td><td>コントレイル</td></tr>
+<tr><td>33</td><td><a href="#horse-33">ベトロテンペスタ</a></td><td>シャンパンエニワン</td><td>コントレイル</td></tr>
+<tr><td>34</td><td><a href="#horse-34">エスクアドラ</a></td><td>ジューヌエコール</td><td>レイデオロ</td></tr>
+<tr><td>35</td><td><a href="#horse-35">ブレイクアウェイ</a></td><td>ザウェイアイアム</td><td>キズナ</td></tr>
+<tr><td>36</td><td><a href="#horse-36">クインアマランサスの24</a></td><td>クインアマランサス</td><td>ゴールドドリーム</td></tr>
+<tr><td>37</td><td><a href="#horse-37">キラービューティの24</a></td><td>キラービューティ</td><td>ドレフォン</td></tr>
+<tr><td>38</td><td><a href="#horse-38">エリカプロヴァンス</a></td><td>チェロキーメイドン</td><td>キタサンブラック</td></tr>
+<tr><td>39</td><td><a href="#horse-39">ミッドナイトビズーの24</a></td><td>ミッドナイトビズー</td><td>キタサンブラック</td></tr>
+<tr><td>40</td><td><a href="#horse-40">ソシアルクラブの24</a></td><td>ソシアルクラブ</td><td>キタサンブラック</td></tr>
+<tr><td>41</td><td><a href="#horse-41">ログポーズ</a></td><td>プティフォリー</td><td>キタサンブラック</td></tr>
+<tr><td>42</td><td><a href="#horse-42">ヴィルマリー</a></td><td>レキシールー</td><td>キタサンブラック</td></tr>
+<tr><td>43</td><td><a href="#horse-43">ベラジオパンテーラ</a></td><td>ダイワダッチェス</td><td>キズナ</td></tr>
+<tr><td>44</td><td><a href="#horse-44">リリックラヴ</a></td><td>エピックラヴ</td><td>ロードカナロア</td></tr>
+<tr><td>45</td><td><a href="#horse-45">キトゥンズクラフト</a></td><td>ダンスウィズキトゥン</td><td>オルフェーヴル</td></tr>
+<tr><td>46</td><td><a href="#horse-46">コナパームス</a></td><td>コナブリュワーズ</td><td>アドマイヤマーズ</td></tr>
+<tr><td>47</td><td><a href="#horse-47">レッドインサイト</a></td><td>ダンシングラグズ</td><td>エピファネイア</td></tr>
+<tr><td>48</td><td><a href="#horse-48">ルーメンルーナエ</a></td><td>ルリアナ</td><td>エピファネイア</td></tr>
+<tr><td>49</td><td><a href="#horse-49">ベルバーニア</a></td><td>アドマイヤローザ</td><td>キタサンブラック</td></tr>
+<tr><td>50</td><td><a href="#horse-50">エターナルバラード</a></td><td>バラーディスト</td><td>ロードカナロア</td></tr></tbody>
+          </table>
+        </div>
+      </aside>
+      <section aria-labelledby="cards-title">
+        <h2 class="section-title" id="cards-title">個別メモ</h2>
+        <p class="lead" id="resultCount">50頭を表示中</p>
+        <div class="empty" id="emptyState">該当する馬がありません。</div>
+        <div class="cards" id="horseCards">
+          
+        <article class="horse-card" id="horse-01" data-name="ジャンゴッド" data-dam="マーゴットディド" data-sire="キタサンブラック" data-rank="1">
+          <div class="card-head">
+            <div class="rank-mark">01</div>
+            <div>
+              <p class="bloodline">マーゴットディド x キタサンブラック</p>
+              <h3>ジャンゴッド</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/21 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>杉山晴紀 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>藤田 晋</strong></div><div class="fact"><span>馬名由来</span><strong>麻雀の神</strong></div><div class="fact"><span>人気</span><strong>2位 / 指名数 31 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>英G1ナンソープS勝ち馬として知られるスピード豊かな母。キタサンブラックとの配合では、母の速さと父の持続力の混ざり方が見どころ。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 2位（指名数 31） / 提示リスト上位の中心候補 / POG-INFO個別ページ確認済み。父キタサンブラック×母マーゴットディドという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106624/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106624" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%B8%E3%83%A3%E3%83%B3%E3%82%B4%E3%83%83%E3%83%89%20%E3%83%9E%E3%83%BC%E3%82%B4%E3%83%83%E3%83%88%E3%83%87%E3%82%A3%E3%83%89%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-02" data-name="エルドボルグ" data-dam="コンサートホール" data-sire="キタサンブラック" data-rank="2">
+          <div class="card-head">
+            <div class="rank-mark">02</div>
+            <div>
+              <p class="bloodline">コンサートホール x キタサンブラック</p>
+              <h3>エルドボルグ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/03/22 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>斉藤崇史 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>サンデーレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>アイスランドのコンサートホール、ハルパのメインホール名</strong></div><div class="fact"><span>人気</span><strong>3位 / 指名数 30 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>欧州で重賞級の実績を持つ良血牝馬として扱われる母。父キタサンブラックで日本の芝中距離に寄せた時の変化を見たい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 3位（指名数 30） / 提示リスト上位の中心候補 / POG-INFO個別ページ確認済み。父キタサンブラック×母コンサートホールという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106314/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106314" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%A8%E3%83%AB%E3%83%89%E3%83%9C%E3%83%AB%E3%82%B0%20%E3%82%B3%E3%83%B3%E3%82%B5%E3%83%BC%E3%83%88%E3%83%9B%E3%83%BC%E3%83%AB%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-03" data-name="ソブリオ" data-dam="ノームコア" data-sire="キタサンブラック" data-rank="3">
+          <div class="card-head">
+            <div class="rank-mark">03</div>
+            <div>
+              <p class="bloodline">ノームコア x キタサンブラック</p>
+              <h3>ソブリオ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/03/15 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>芦毛</strong></div><div class="fact"><span>厩舎</span><strong>友道康夫 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>金子真人ホールディングス</strong></div><div class="fact"><span>馬名由来</span><strong>質素（西）</strong></div><div class="fact"><span>人気</span><strong>8位 / 指名数 24 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>ヴィクトリアマイル、香港カップを勝ったG1牝馬。スピードと中距離対応力の両方を持つ母として、クラシック距離への想像が膨らむ。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 8位（指名数 24） / 提示リスト上位の中心候補 / POG-INFO個別ページ確認済み。父キタサンブラック×母ノームコアという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106496/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106496" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%BD%E3%83%96%E3%83%AA%E3%82%AA%20%E3%83%8E%E3%83%BC%E3%83%A0%E3%82%B3%E3%82%A2%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-04" data-name="チェスティーノ" data-dam="チェッキーノ" data-sire="エフフォーリア" data-rank="4">
+          <div class="card-head">
+            <div class="rank-mark">04</div>
+            <div>
+              <p class="bloodline">チェッキーノ x エフフォーリア</p>
+              <h3>チェスティーノ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/04/11 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>黒鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>鹿戸雄一 (美)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>サンデーレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>籠（伊）</strong></div><div class="fact"><span>人気</span><strong>4位 / 指名数 29 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>皐月賞、天皇賞（秋）、有馬記念を勝った新しめの父。産駒傾向はこれから固まる段階なので、父の競走実績と母系の裏付けを合わせて楽しむ枠。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>フローラS勝ち、オークス2着の実績を持つ母。父エフフォーリアとの組み合わせは、王道路線の雰囲気が強い。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 4位（指名数 29） / 提示リスト上位の中心候補 / POG-INFO個別ページ確認済み。父エフフォーリア×母チェッキーノという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106452/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106452" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%81%E3%82%A7%E3%82%B9%E3%83%86%E3%82%A3%E3%83%BC%E3%83%8E%20%E3%83%81%E3%82%A7%E3%83%83%E3%82%AD%E3%83%BC%E3%83%8E%20%E3%82%A8%E3%83%95%E3%83%95%E3%82%A9%E3%83%BC%E3%83%AA%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-05" data-name="ダノンダックス" data-dam="ヤンキーローズ" data-sire="サートゥルナーリア" data-rank="5">
+          <div class="card-head">
+            <div class="rank-mark">05</div>
+            <div>
+              <p class="bloodline">ヤンキーローズ x サートゥルナーリア</p>
+              <h3>ダノンダックス</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/19 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>黒鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>田中博康 (美)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>ダノックス</strong></div><div class="fact"><span>馬名由来</span><strong>冠名＋フランスの地名</strong></div><div class="fact"><span>人気</span><strong>5位 / 指名数 28 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>ロードカナロア×シーザリオの血を持つ新世代種牡馬。スピード、瞬発力、シーザリオ牝系の底力をどう伝えるかがPOG的な見どころ。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>豪G1馬で、リバティアイランドの母としても注目度が高い。父サートゥルナーリアとの組み合わせはスター性十分。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 5位（指名数 28） / 提示リスト上位の中心候補 / POG-INFO個別ページ確認済み。父サートゥルナーリア×母ヤンキーローズという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106662/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106662" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%80%E3%83%8E%E3%83%B3%E3%83%80%E3%83%83%E3%82%AF%E3%82%B9%20%E3%83%A4%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%BA%20%E3%82%B5%E3%83%BC%E3%83%88%E3%82%A5%E3%83%AB%E3%83%8A%E3%83%BC%E3%83%AA%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-06" data-name="ラガリーガ" data-dam="ラサルダン" data-sire="キズナ" data-rank="6">
+          <div class="card-head">
+            <div class="rank-mark">06</div>
+            <div>
+              <p class="bloodline">ラサルダン x キズナ</p>
+              <h3>ラガリーガ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/03/03 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>青鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>手塚貴久 (美)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>キャロットファーム</strong></div><div class="fact"><span>馬名由来</span><strong>スペイン、カタルーニャ地方にある地名。母名より連想</strong></div><div class="fact"><span>人気</span><strong>6位 / 指名数 25 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>ディープインパクト後継として、芝中距離の持続力と完成度を期待しやすい父。クラシック路線でも堅実に候補を出すタイプとして見たい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母ラサルダン。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 6位（指名数 25） / 提示リスト上位の中心候補 / POG-INFO個別ページ確認済み。父キズナ×母ラサルダンという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106670/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106670" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%A9%E3%82%AC%E3%83%AA%E3%83%BC%E3%82%AC%20%E3%83%A9%E3%82%B5%E3%83%AB%E3%83%80%E3%83%B3%20%E3%82%AD%E3%82%BA%E3%83%8A%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-07" data-name="ジョドレルバンク" data-dam="アースライズ" data-sire="エフフォーリア" data-rank="7">
+          <div class="card-head">
+            <div class="rank-mark">07</div>
+            <div>
+              <p class="bloodline">アースライズ x エフフォーリア</p>
+              <h3>ジョドレルバンク</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/18 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>黒鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>武井亮 (美)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>吉田 勝己</strong></div><div class="fact"><span>馬名由来</span><strong>イギリスにある天文台の名称</strong></div><div class="fact"><span>人気</span><strong>9位 / 指名数 23 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>皐月賞、天皇賞（秋）、有馬記念を勝った新しめの父。産駒傾向はこれから固まる段階なので、父の競走実績と母系の裏付けを合わせて楽しむ枠。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>重賞戦線で存在感を見せた母。父エフフォーリアとの配合では、芝中距離の底力をどう出すかが読みどころ。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 9位（指名数 23） / 提示リスト上位の中心候補 / POG-INFO個別ページ確認済み。父エフフォーリア×母アースライズという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106161/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106161" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%B8%E3%83%A7%E3%83%89%E3%83%AC%E3%83%AB%E3%83%90%E3%83%B3%E3%82%AF%20%E3%82%A2%E3%83%BC%E3%82%B9%E3%83%A9%E3%82%A4%E3%82%BA%20%E3%82%A8%E3%83%95%E3%83%95%E3%82%A9%E3%83%BC%E3%83%AA%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-08" data-name="ダイナマイク" data-dam="シンプリーラヴィシング" data-sire="キタサンブラック" data-rank="8">
+          <div class="card-head">
+            <div class="rank-mark">08</div>
+            <div>
+              <p class="bloodline">シンプリーラヴィシング x キタサンブラック</p>
+              <h3>ダイナマイク</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/03/11 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>中内田充 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>藤田 晋</strong></div><div class="fact"><span>馬名由来</span><strong>曲名より</strong></div><div class="fact"><span>人気</span><strong>16位 / 指名数 20 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>米G1アルシバイアディーズS勝ち馬。藤田晋オーナー×中内田厩舎の文脈も含めて、POGで目を引く材料が多い。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 16位（指名数 20） / 提示リスト上位の中心候補 / POG-INFO個別ページ確認済み。父キタサンブラック×母シンプリーラヴィシングという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106368/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106368" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%80%E3%82%A4%E3%83%8A%E3%83%9E%E3%82%A4%E3%82%AF%20%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AA%E3%83%BC%E3%83%A9%E3%83%B4%E3%82%A3%E3%82%B7%E3%83%B3%E3%82%B0%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-09" data-name="ラッキースパークル" data-dam="ラッキーライラック" data-sire="エピファネイア" data-rank="9">
+          <div class="card-head">
+            <div class="rank-mark">09</div>
+            <div>
+              <p class="bloodline">ラッキーライラック x エピファネイア</p>
+              <h3>ラッキースパークル</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/19 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>黒鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>松永幹夫 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>サンデーレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>幸運なきらめき</strong></div><div class="fact"><span>人気</span><strong>1位 / 指名数 33 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>シーザリオの血を通じたクラシック感が強い父。大物感が魅力で、母系のスピードや気性面との組み合わせを読むのが楽しい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>阪神JF、エリザベス女王杯、大阪杯などを勝った名牝。初仔級の注目度というだけで誌面の主役感がある。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 1位（指名数 33） / 提示リスト上位の中心候補 / POG-INFO個別ページ確認済み。父エピファネイア×母ラッキーライラックという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106675/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106675" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%A9%E3%83%83%E3%82%AD%E3%83%BC%E3%82%B9%E3%83%91%E3%83%BC%E3%82%AF%E3%83%AB%20%E3%83%A9%E3%83%83%E3%82%AD%E3%83%BC%E3%83%A9%E3%82%A4%E3%83%A9%E3%83%83%E3%82%AF%20%E3%82%A8%E3%83%94%E3%83%95%E3%82%A1%E3%83%8D%E3%82%A4%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-10" data-name="ノイエルング" data-dam="プレミアエンブレム" data-sire="フィエールマン" data-rank="10">
+          <div class="card-head">
+            <div class="rank-mark">10</div>
+            <div>
+              <p class="bloodline">プレミアエンブレム x フィエールマン</p>
+              <h3>ノイエルング</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/04/11</strong></div><div class="fact"><span>毛色</span><strong>芦毛</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>革新（独）</strong></div><div class="fact"><span>人気</span><strong>10位 / 指名数 23 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>菊花賞と天皇賞（春）を勝ったステイヤー色の父。POGでは母系のスピードや早期性がどれだけ補うかを確認したい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母プレミアエンブレム。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 10位（指名数 23） / 提示リスト上位の中心候補 / POG-INFO個別ページ確認済み。父フィエールマン×母プレミアエンブレムという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: 入力リストは父フィエールマン・母プレミアエンブレムだが、POG-INFOランキング表では父サートゥルナーリア・母クロノジェネシスとして掲載。別馬、表記揺れ、情報更新の可能性があるため要確認。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106292/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106292" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%8E%E3%82%A4%E3%82%A8%E3%83%AB%E3%83%B3%E3%82%B0%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%82%A8%E3%83%B3%E3%83%96%E3%83%AC%E3%83%A0%20%E3%83%95%E3%82%A3%E3%82%A8%E3%83%BC%E3%83%AB%E3%83%9E%E3%83%B3%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-11" data-name="レジューノワール" data-dam="アーモンドアイ" data-sire="キタサンブラック" data-rank="11">
+          <div class="card-head">
+            <div class="rank-mark">11</div>
+            <div>
+              <p class="bloodline">アーモンドアイ x キタサンブラック</p>
+              <h3>レジューノワール</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/01/12</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>黒い目（仏）。母名より連想</strong></div><div class="fact"><span>人気</span><strong>7位 / 指名数 24 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>日本競馬を代表するG1馬。母の実績が大きすぎるぶん、POGでは期待と人気のバランスをどう取るかがテーマ。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 7位（指名数 24） / 上位候補の厚みを作る一頭 / POG-INFO個別ページ確認済み。父キタサンブラック×母アーモンドアイという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106164/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106164" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%AC%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%8E%E3%83%AF%E3%83%BC%E3%83%AB%20%E3%82%A2%E3%83%BC%E3%83%A2%E3%83%B3%E3%83%89%E3%82%A2%E3%82%A4%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-12" data-name="イルリサット" data-dam="アエロリット" data-sire="キズナ" data-rank="12">
+          <div class="card-head">
+            <div class="rank-mark">12</div>
+            <div>
+              <p class="bloodline">アエロリット x キズナ</p>
+              <h3>イルリサット</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/01/23 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>芦毛</strong></div><div class="fact"><span>厩舎</span><strong>菊沢隆徳 (美)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>サンデーレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>グリーンランド西岸中部の町</strong></div><div class="fact"><span>人気</span><strong>15位 / 指名数 20 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>ディープインパクト後継として、芝中距離の持続力と完成度を期待しやすい父。クラシック路線でも堅実に候補を出すタイプとして見たい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>NHKマイルC勝ち馬で、スピードと先行力のイメージが強い母。父キズナで距離の幅が出るかを見たい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 15位（指名数 20） / 上位候補の厚みを作る一頭 / POG-INFO個別ページ確認済み。父キズナ×母アエロリットという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106115/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106115" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%A4%E3%83%AB%E3%83%AA%E3%82%B5%E3%83%83%E3%83%88%20%E3%82%A2%E3%82%A8%E3%83%AD%E3%83%AA%E3%83%83%E3%83%88%20%E3%82%AD%E3%82%BA%E3%83%8A%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-13" data-name="リボンロード" data-dam="ジュベルアリ" data-sire="リオンディーズ" data-rank="13">
+          <div class="card-head">
+            <div class="rank-mark">13</div>
+            <div>
+              <p class="bloodline">ジュベルアリ x リオンディーズ</p>
+              <h3>リボンロード</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/04/18 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>青鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>上原佑紀 (美)</strong></div><div class="fact"><span>生産者</span><strong>レイクヴィラファーム</strong></div><div class="fact"><span>馬主</span><strong>藤田 晋</strong></div><div class="fact"><span>馬名由来</span><strong>リボンの道</strong></div><div class="fact"><span>人気</span><strong>14位 / 指名数 22 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>シーザリオ牝系の父で、パワーと芝中距離の伸びしろを感じさせるタイプ。母系の軽さや完成度との相性を見たい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母ジュベルアリ。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 14位（指名数 22） / 上位候補の厚みを作る一頭 / POG-INFO個別ページ確認済み。父リオンディーズ×母ジュベルアリという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024107154/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024107154" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%AA%E3%83%9C%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%20%E3%82%B8%E3%83%A5%E3%83%99%E3%83%AB%E3%82%A2%E3%83%AA%20%E3%83%AA%E3%82%AA%E3%83%B3%E3%83%87%E3%82%A3%E3%83%BC%E3%82%BA%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-14" data-name="シャムリベルク" data-dam="スイススカイダイバー" data-sire="エピファネイア" data-rank="14">
+          <div class="card-head">
+            <div class="rank-mark">14</div>
+            <div>
+              <p class="bloodline">スイススカイダイバー x エピファネイア</p>
+              <h3>シャムリベルク</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/04</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>スイスのウーリ州にあるアルプスの山</strong></div><div class="fact"><span>人気</span><strong>28位 / 指名数 16 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>シーザリオの血を通じたクラシック感が強い父。大物感が魅力で、母系のスピードや気性面との組み合わせを読むのが楽しい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>プリークネスS勝ちを含む米国の名牝。エピファネイアとの組み合わせは、海外ダート色と日本芝クラシック感の交差点。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 28位（指名数 16） / 上位候補の厚みを作る一頭 / POG-INFO個別ページ確認済み。父エピファネイア×母スイススカイダイバーという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106391/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106391" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%B7%E3%83%A3%E3%83%A0%E3%83%AA%E3%83%99%E3%83%AB%E3%82%AF%20%E3%82%B9%E3%82%A4%E3%82%B9%E3%82%B9%E3%82%AB%E3%82%A4%E3%83%80%E3%82%A4%E3%83%90%E3%83%BC%20%E3%82%A8%E3%83%94%E3%83%95%E3%82%A1%E3%83%8D%E3%82%A4%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-15" data-name="サンタンジェロ" data-dam="モアナアネラ" data-sire="エピファネイア" data-rank="15">
+          <div class="card-head">
+            <div class="rank-mark">15</div>
+            <div>
+              <p class="bloodline">モアナアネラ x エピファネイア</p>
+              <h3>サンタンジェロ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/11 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>須貝尚介 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>サンデーレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>ローマのテヴェレ川右岸にある城塞。天使の住む城</strong></div><div class="fact"><span>人気</span><strong>12位 / 指名数 22 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>シーザリオの血を通じたクラシック感が強い父。大物感が魅力で、母系のスピードや気性面との組み合わせを読むのが楽しい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母モアナアネラ。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 12位（指名数 22） / 上位候補の厚みを作る一頭 / POG-INFO個別ページ確認済み。父エピファネイア×母モアナアネラという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106654/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106654" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%B5%E3%83%B3%E3%82%BF%E3%83%B3%E3%82%B8%E3%82%A7%E3%83%AD%20%E3%83%A2%E3%82%A2%E3%83%8A%E3%82%A2%E3%83%8D%E3%83%A9%20%E3%82%A8%E3%83%94%E3%83%95%E3%82%A1%E3%83%8D%E3%82%A4%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-16" data-name="エクアトーレ" data-dam="シャトーブランシュ" data-sire="キタサンブラック" data-rank="16">
+          <div class="card-head">
+            <div class="rank-mark">16</div>
+            <div>
+              <p class="bloodline">シャトーブランシュ x キタサンブラック</p>
+              <h3>エクアトーレ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/03/07</strong></div><div class="fact"><span>毛色</span><strong>黒鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>赤道（伊）</strong></div><div class="fact"><span>人気</span><strong>13位 / 指名数 22 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>マーメイドS勝ち馬で、ヴェラアズールの母としても知られる。キタサンブラックとの配合は底力が魅力。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 13位（指名数 22） / 上位候補の厚みを作る一頭 / POG-INFO個別ページ確認済み。父キタサンブラック×母シャトーブランシュという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106349/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106349" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%A8%E3%82%AF%E3%82%A2%E3%83%88%E3%83%BC%E3%83%AC%20%E3%82%B7%E3%83%A3%E3%83%88%E3%83%BC%E3%83%96%E3%83%A9%E3%83%B3%E3%82%B7%E3%83%A5%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-17" data-name="ホウオウモノポリー" data-dam="インカーヴィル" data-sire="キズナ" data-rank="17">
+          <div class="card-head">
+            <div class="rank-mark">17</div>
+            <div>
+              <p class="bloodline">インカーヴィル x キズナ</p>
+              <h3>ホウオウモノポリー</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/01/29 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>友道康夫 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>小笹 芳央</strong></div><div class="fact"><span>馬名由来</span><strong>冠名＋独占</strong></div><div class="fact"><span>人気</span><strong>17位 / 指名数 19 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>ディープインパクト後継として、芝中距離の持続力と完成度を期待しやすい父。クラシック路線でも堅実に候補を出すタイプとして見たい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母インカーヴィル。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 17位（指名数 19） / 上位候補の厚みを作る一頭 / POG-INFO個別ページ確認済み。父キズナ×母インカーヴィルという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106175/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106175" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%9B%E3%82%A6%E3%82%AA%E3%82%A6%E3%83%A2%E3%83%8E%E3%83%9D%E3%83%AA%E3%83%BC%20%E3%82%A4%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%B4%E3%82%A3%E3%83%AB%20%E3%82%AD%E3%82%BA%E3%83%8A%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-18" data-name="ウィクフォード" data-dam="ウィクトーリア" data-sire="キタサンブラック" data-rank="18">
+          <div class="card-head">
+            <div class="rank-mark">18</div>
+            <div>
+              <p class="bloodline">ウィクトーリア x キタサンブラック</p>
+              <h3>ウィクフォード</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/03/14 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>高野友和 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>シルクレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>イングランド東部にある都市名。母名より連想</strong></div><div class="fact"><span>人気</span><strong>21位 / 指名数 18 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>フローラS勝ち馬。キタサンブラック産駒として、牝系の中距離資質を素直に楽しめる。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 21位（指名数 18） / 上位候補の厚みを作る一頭 / POG-INFO個別ページ確認済み。父キタサンブラック×母ウィクトーリアという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106183/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106183" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%A6%E3%82%A3%E3%82%AF%E3%83%95%E3%82%A9%E3%83%BC%E3%83%89%20%E3%82%A6%E3%82%A3%E3%82%AF%E3%83%88%E3%83%BC%E3%83%AA%E3%82%A2%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-19" data-name="フィリオソラーレ" data-dam="フィリアプーラ" data-sire="エピファネイア" data-rank="19">
+          <div class="card-head">
+            <div class="rank-mark">19</div>
+            <div>
+              <p class="bloodline">フィリアプーラ x エピファネイア</p>
+              <h3>フィリオソラーレ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/01/10 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>青鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>木村哲也 (美)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>キャロットファーム</strong></div><div class="fact"><span>馬名由来</span><strong>太陽の子（伊）。母名より連想</strong></div><div class="fact"><span>人気</span><strong>22位 / 指名数 17 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>シーザリオの血を通じたクラシック感が強い父。大物感が魅力で、母系のスピードや気性面との組み合わせを読むのが楽しい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>フェアリーS勝ち馬。母の早期重賞実績はPOG向きの材料。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 22位（指名数 17） / 上位候補の厚みを作る一頭 / POG-INFO個別ページ確認済み。父エピファネイア×母フィリアプーラという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106538/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106538" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%95%E3%82%A3%E3%83%AA%E3%82%AA%E3%82%BD%E3%83%A9%E3%83%BC%E3%83%AC%20%E3%83%95%E3%82%A3%E3%83%AA%E3%82%A2%E3%83%97%E3%83%BC%E3%83%A9%20%E3%82%A8%E3%83%94%E3%83%95%E3%82%A1%E3%83%8D%E3%82%A4%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-20" data-name="ユタライト" data-dam="ユナカイト" data-sire="ロードカナロア" data-rank="20">
+          <div class="card-head">
+            <div class="rank-mark">20</div>
+            <div>
+              <p class="bloodline">ユナカイト x ロードカナロア</p>
+              <h3>ユタライト</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/01/29 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>宮田敬介 (美)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>シルクレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>天然石の一種。母名より連想</strong></div><div class="fact"><span>人気</span><strong>11位 / 指名数 22 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>スピードとマイル適性を軸に見やすい父。母系が中距離寄りなら、POG期間内の幅広い条件に対応できるかが楽しみ。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母ユナカイト。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 11位（指名数 22） / 上位候補の厚みを作る一頭 / POG-INFO個別ページ確認済み。父ロードカナロア×母ユナカイトという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106664/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106664" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%A6%E3%82%BF%E3%83%A9%E3%82%A4%E3%83%88%20%E3%83%A6%E3%83%8A%E3%82%AB%E3%82%A4%E3%83%88%20%E3%83%AD%E3%83%BC%E3%83%89%E3%82%AB%E3%83%8A%E3%83%AD%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-21" data-name="フェニックスロール" data-dam="コスモポリタンクイーン" data-sire="コントレイル" data-rank="21">
+          <div class="card-head">
+            <div class="rank-mark">21</div>
+            <div>
+              <p class="bloodline">コスモポリタンクイーン x コントレイル</p>
+              <h3>フェニックスロール</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>無敗の三冠馬として期待を背負う新世代種牡馬。2026-2027は産駒の初期評価そのものを追いかける面白さがある。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母コスモポリタンクイーン。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>上位候補の厚みを作る一頭。父コントレイル×母コスモポリタンクイーンという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106308/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%95%E3%82%A7%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AD%E3%83%BC%E3%83%AB%20%E3%82%B3%E3%82%B9%E3%83%A2%E3%83%9D%E3%83%AA%E3%82%BF%E3%83%B3%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3%20%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AC%E3%82%A4%E3%83%AB%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-22" data-name="マスターズボンド" data-dam="スクールミストレス" data-sire="キズナ" data-rank="22">
+          <div class="card-head">
+            <div class="rank-mark">22</div>
+            <div>
+              <p class="bloodline">スクールミストレス x キズナ</p>
+              <h3>マスターズボンド</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>ディープインパクト後継として、芝中距離の持続力と完成度を期待しやすい父。クラシック路線でも堅実に候補を出すタイプとして見たい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母スクールミストレス。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>上位候補の厚みを作る一頭。父キズナ×母スクールミストレスという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/?pid=horse_list&amp;word=%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%BA%E3%83%9C%E3%83%B3%E3%83%89" target="_blank" rel="noopener">netkeiba DB検索（個別ページ未特定）</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%BA%E3%83%9C%E3%83%B3%E3%83%89%20%E3%82%B9%E3%82%AF%E3%83%BC%E3%83%AB%E3%83%9F%E3%82%B9%E3%83%88%E3%83%AC%E3%82%B9%20%E3%82%AD%E3%82%BA%E3%83%8A%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-23" data-name="キューティボンド" data-dam="コーステッド" data-sire="サートゥルナーリア" data-rank="23">
+          <div class="card-head">
+            <div class="rank-mark">23</div>
+            <div>
+              <p class="bloodline">コーステッド x サートゥルナーリア</p>
+              <h3>キューティボンド</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/01/22 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>黒鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>福永祐一 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>藤田 晋</strong></div><div class="fact"><span>馬名由来</span><strong>可愛い＋姉名の一部</strong></div><div class="fact"><span>人気</span><strong>37位 / 指名数 13 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>ロードカナロア×シーザリオの血を持つ新世代種牡馬。スピード、瞬発力、シーザリオ牝系の底力をどう伝えるかがPOG的な見どころ。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>米芝G1級の実績と、ダノンベルーガを出した母として注目度が高い。福永厩舎×藤田晋オーナーの文脈も濃い。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 37位（指名数 13） / 上位候補の厚みを作る一頭 / POG-INFO個別ページ確認済み。父サートゥルナーリア×母コーステッドという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106316/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106316" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%9C%E3%83%B3%E3%83%89%20%E3%82%B3%E3%83%BC%E3%82%B9%E3%83%86%E3%83%83%E3%83%89%20%E3%82%B5%E3%83%BC%E3%83%88%E3%82%A5%E3%83%AB%E3%83%8A%E3%83%BC%E3%83%AA%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-24" data-name="ダノンデスティニー" data-dam="コンヴィクション２" data-sire="キタサンブラック" data-rank="24">
+          <div class="card-head">
+            <div class="rank-mark">24</div>
+            <div>
+              <p class="bloodline">コンヴィクション２ x キタサンブラック</p>
+              <h3>ダノンデスティニー</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/27 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>中内田充 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>ダノックス</strong></div><div class="fact"><span>馬名由来</span><strong>冠名＋運命</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母コンヴィクション２。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>上位候補の厚みを作る一頭 / POG-INFO個別ページ確認済み。父キタサンブラック×母コンヴィクション２という入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106313/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106313" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%80%E3%83%8E%E3%83%B3%E3%83%87%E3%82%B9%E3%83%86%E3%82%A3%E3%83%8B%E3%83%BC%20%E3%82%B3%E3%83%B3%E3%83%B4%E3%82%A3%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%EF%BC%92%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-25" data-name="バティック" data-dam="カット" data-sire="エピファネイア" data-rank="25">
+          <div class="card-head">
+            <div class="rank-mark">25</div>
+            <div>
+              <p class="bloodline">カット x エピファネイア</p>
+              <h3>バティック</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>シーザリオの血を通じたクラシック感が強い父。大物感が魅力で、母系のスピードや気性面との組み合わせを読むのが楽しい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母カット。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>上位候補の厚みを作る一頭。父エピファネイア×母カットという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106168/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%90%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF%20%E3%82%AB%E3%83%83%E3%83%88%20%E3%82%A8%E3%83%94%E3%83%95%E3%82%A1%E3%83%8D%E3%82%A4%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-26" data-name="ゼビウス" data-dam="ビブロス" data-sire="エピファネイア" data-rank="26">
+          <div class="card-head">
+            <div class="rank-mark">26</div>
+            <div>
+              <p class="bloodline">ビブロス x エピファネイア</p>
+              <h3>ゼビウス</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>シーザリオの血を通じたクラシック感が強い父。大物感が魅力で、母系のスピードや気性面との組み合わせを読むのが楽しい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>秋華賞、ドバイターフ勝ち馬。エピファネイアとの組み合わせは、牝系の華やかさがとても強い。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠。父エピファネイア×母ビブロスという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/?pid=horse_list&amp;word=%E3%82%BC%E3%83%93%E3%82%A6%E3%82%B9" target="_blank" rel="noopener">netkeiba DB検索（個別ページ未特定）</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%BC%E3%83%93%E3%82%A6%E3%82%B9%20%E3%83%93%E3%83%96%E3%83%AD%E3%82%B9%20%E3%82%A8%E3%83%94%E3%83%95%E3%82%A1%E3%83%8D%E3%82%A4%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-27" data-name="アドマイヤモカ" data-dam="アドマイヤミヤビ" data-sire="モーリス" data-rank="27">
+          <div class="card-head">
+            <div class="rank-mark">27</div>
+            <div>
+              <p class="bloodline">アドマイヤミヤビ x モーリス</p>
+              <h3>アドマイヤモカ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/01</strong></div><div class="fact"><span>毛色</span><strong>芦毛</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>冠名＋イエメンにある港町「モカ」より</strong></div><div class="fact"><span>人気</span><strong>42位 / 指名数 12 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>マイルから中距離のパワーと成長力を感じさせる父。母系がクラシック寄りなら距離の広がりも楽しめる。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>クイーンC勝ち、オークス上位の実績を持つ母。モーリス産駒として中距離の成長力を見たい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 42位（指名数 12） / 血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父モーリス×母アドマイヤミヤビという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106136/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106136" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%A2%E3%83%89%E3%83%9E%E3%82%A4%E3%83%A4%E3%83%A2%E3%82%AB%20%E3%82%A2%E3%83%89%E3%83%9E%E3%82%A4%E3%83%A4%E3%83%9F%E3%83%A4%E3%83%93%20%E3%83%A2%E3%83%BC%E3%83%AA%E3%82%B9%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-28" data-name="タクティシアン" data-dam="モルジアナ" data-sire="サリオス" data-rank="28">
+          <div class="card-head">
+            <div class="rank-mark">28</div>
+            <div>
+              <p class="bloodline">モルジアナ x サリオス</p>
+              <h3>タクティシアン</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/01/31 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>栗毛</strong></div><div class="fact"><span>厩舎</span><strong>森一誠 (美)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>シルクレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>優れた戦術家</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>ハーツクライ系のスピードと馬格を連想しやすい父。マイルから中距離あたりで母系の良さがどう出るかを見たい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母モルジアナ。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父サリオス×母モルジアナという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106657/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106657" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%BF%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B7%E3%82%A2%E3%83%B3%20%E3%83%A2%E3%83%AB%E3%82%B8%E3%82%A2%E3%83%8A%20%E3%82%B5%E3%83%AA%E3%82%AA%E3%82%B9%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-29" data-name="インサイドエッジ" data-dam="デアリングエッジ" data-sire="エピファネイア" data-rank="29">
+          <div class="card-head">
+            <div class="rank-mark">29</div>
+            <div>
+              <p class="bloodline">デアリングエッジ x エピファネイア</p>
+              <h3>インサイドエッジ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/03/07 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>青鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>和田勇介 (美)</strong></div><div class="fact"><span>生産者</span><strong>社台ファーム</strong></div><div class="fact"><span>馬主</span><strong>社台レースホース</strong></div><div class="fact"><span>馬名由来</span><strong>フィギュアスケートのブレードの内側の溝。重要な事柄</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>シーザリオの血を通じたクラシック感が強い父。大物感が魅力で、母系のスピードや気性面との組み合わせを読むのが楽しい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母デアリングエッジ。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父エピファネイア×母デアリングエッジという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024107186/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024107186" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%A4%E3%83%B3%E3%82%B5%E3%82%A4%E3%83%89%E3%82%A8%E3%83%83%E3%82%B8%20%E3%83%87%E3%82%A2%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%A8%E3%83%83%E3%82%B8%20%E3%82%A8%E3%83%94%E3%83%95%E3%82%A1%E3%83%8D%E3%82%A4%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-30" data-name="メアグローリア" data-dam="アンティフォナ" data-sire="サリオス" data-rank="30">
+          <div class="card-head">
+            <div class="rank-mark">30</div>
+            <div>
+              <p class="bloodline">アンティフォナ x サリオス</p>
+              <h3>メアグローリア</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/01/23 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>栗毛</strong></div><div class="fact"><span>厩舎</span><strong>斉藤崇史 (栗)</strong></div><div class="fact"><span>生産者</span><strong>社台コーポレーション白老ファーム</strong></div><div class="fact"><span>馬主</span><strong>シルクレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>私の（ラテン語）＋栄光（ラテン語）。母名より連想</strong></div><div class="fact"><span>人気</span><strong>27位 / 指名数 16 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>ハーツクライ系のスピードと馬格を連想しやすい父。マイルから中距離あたりで母系の良さがどう出るかを見たい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>ラウダシオンを出した母。サリオスとの配合ではマイル前後のスピード感が気になる。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 27位（指名数 16） / 血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父サリオス×母アンティフォナという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106969/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106969" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%A1%E3%82%A2%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%AA%E3%82%A2%20%E3%82%A2%E3%83%B3%E3%83%86%E3%82%A3%E3%83%95%E3%82%A9%E3%83%8A%20%E3%82%B5%E3%83%AA%E3%82%AA%E3%82%B9%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-31" data-name="ミエルモーサ" data-dam="ミスエルテ" data-sire="シルバーステート" data-rank="31">
+          <div class="card-head">
+            <div class="rank-mark">31</div>
+            <div>
+              <p class="bloodline">ミスエルテ x シルバーステート</p>
+              <h3>ミエルモーサ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/15 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>黒鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>松下武士 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>サンデーレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>美しい（西）</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>ディープインパクト系らしい切れ味と早めの完成度を期待しやすい父。POGではデビュー時期と体質面も見たい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>ファンタジーS勝ち馬。母の早期スピードと父シルバーステートの軽さはPOG向き。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父シルバーステート×母ミスエルテという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106629/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106629" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%9F%E3%82%A8%E3%83%AB%E3%83%A2%E3%83%BC%E3%82%B5%20%E3%83%9F%E3%82%B9%E3%82%A8%E3%83%AB%E3%83%86%20%E3%82%B7%E3%83%AB%E3%83%90%E3%83%BC%E3%82%B9%E3%83%86%E3%83%BC%E3%83%88%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-32" data-name="シアルナーレ" data-dam="ストロベリームーン" data-sire="コントレイル" data-rank="32">
+          <div class="card-head">
+            <div class="rank-mark">32</div>
+            <div>
+              <p class="bloodline">ストロベリームーン x コントレイル</p>
+              <h3>シアルナーレ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/03/05 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>青鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>田中博康 (美)</strong></div><div class="fact"><span>生産者</span><strong>社台ファーム</strong></div><div class="fact"><span>馬主</span><strong>Ｂｌｏｏｍｉｎｇ Ｒａｃｉｎｇ</strong></div><div class="fact"><span>馬名由来</span><strong>月の軌跡（航跡）、月の飛行機雲（伊）</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>無敗の三冠馬として期待を背負う新世代種牡馬。2026-2027は産駒の初期評価そのものを追いかける面白さがある。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母ストロベリームーン。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父コントレイル×母ストロベリームーンという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024105911/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024105911" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%B7%E3%82%A2%E3%83%AB%E3%83%8A%E3%83%BC%E3%83%AC%20%E3%82%B9%E3%83%88%E3%83%AD%E3%83%99%E3%83%AA%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3%20%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AC%E3%82%A4%E3%83%AB%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-33" data-name="ベトロテンペスタ" data-dam="シャンパンエニワン" data-sire="コントレイル" data-rank="33">
+          <div class="card-head">
+            <div class="rank-mark">33</div>
+            <div>
+              <p class="bloodline">シャンパンエニワン x コントレイル</p>
+              <h3>ベトロテンペスタ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>無敗の三冠馬として期待を背負う新世代種牡馬。2026-2027は産駒の初期評価そのものを追いかける面白さがある。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母シャンパンエニワン。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠。父コントレイル×母シャンパンエニワンという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/?pid=horse_list&amp;word=%E3%83%99%E3%83%88%E3%83%AD%E3%83%86%E3%83%B3%E3%83%9A%E3%82%B9%E3%82%BF" target="_blank" rel="noopener">netkeiba DB検索（個別ページ未特定）</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%99%E3%83%88%E3%83%AD%E3%83%86%E3%83%B3%E3%83%9A%E3%82%B9%E3%82%BF%20%E3%82%B7%E3%83%A3%E3%83%B3%E3%83%91%E3%83%B3%E3%82%A8%E3%83%8B%E3%83%AF%E3%83%B3%20%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AC%E3%82%A4%E3%83%AB%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-34" data-name="エスクアドラ" data-dam="ジューヌエコール" data-sire="レイデオロ" data-rank="34">
+          <div class="card-head">
+            <div class="rank-mark">34</div>
+            <div>
+              <p class="bloodline">ジューヌエコール x レイデオロ</p>
+              <h3>エスクアドラ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/07 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>鹿戸雄一 (美)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>サンデーレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>作戦のために編成された多数の軍艦部隊（西）</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>日本ダービー馬。キングカメハメハ系の中距離感と、母系のスピード補完が読みどころ。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>2歳重賞とスプリント重賞で存在感を見せた母。レイデオロで距離の見方が広がる。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父レイデオロ×母ジューヌエコールという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106386/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106386" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%A8%E3%82%B9%E3%82%AF%E3%82%A2%E3%83%89%E3%83%A9%20%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%8C%E3%82%A8%E3%82%B3%E3%83%BC%E3%83%AB%20%E3%83%AC%E3%82%A4%E3%83%87%E3%82%AA%E3%83%AD%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-35" data-name="ブレイクアウェイ" data-dam="ザウェイアイアム" data-sire="キズナ" data-rank="35">
+          <div class="card-head">
+            <div class="rank-mark">35</div>
+            <div>
+              <p class="bloodline">ザウェイアイアム x キズナ</p>
+              <h3>ブレイクアウェイ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>ディープインパクト後継として、芝中距離の持続力と完成度を期待しやすい父。クラシック路線でも堅実に候補を出すタイプとして見たい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母ザウェイアイアム。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠。父キズナ×母ザウェイアイアムという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024105872/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%A2%E3%82%A6%E3%82%A7%E3%82%A4%20%E3%82%B6%E3%82%A6%E3%82%A7%E3%82%A4%E3%82%A2%E3%82%A4%E3%82%A2%E3%83%A0%20%E3%82%AD%E3%82%BA%E3%83%8A%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-36" data-name="クインアマランサスの24" data-dam="クインアマランサス" data-sire="ゴールドドリーム" data-rank="36">
+          <div class="card-head">
+            <div class="rank-mark">36</div>
+            <div>
+              <p class="bloodline">クインアマランサス x ゴールドドリーム</p>
+              <h3>クインアマランサスの24</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>ダートG1級の実績を持つ父。POGでは芝クラシックだけでなく、ダート新馬や早期勝ち上がりの文脈でも見たい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母クインアマランサス。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠。父ゴールドドリーム×母クインアマランサスという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/?pid=horse_list&amp;word=%E3%82%AF%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%9E%E3%83%A9%E3%83%B3%E3%82%B5%E3%82%B9%E3%81%AE24" target="_blank" rel="noopener">netkeiba DB検索（個別ページ未特定）</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%AF%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%9E%E3%83%A9%E3%83%B3%E3%82%B5%E3%82%B9%E3%81%AE24%20%E3%82%AF%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%9E%E3%83%A9%E3%83%B3%E3%82%B5%E3%82%B9%20%E3%82%B4%E3%83%BC%E3%83%AB%E3%83%89%E3%83%89%E3%83%AA%E3%83%BC%E3%83%A0%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-37" data-name="キラービューティの24" data-dam="キラービューティ" data-sire="ドレフォン" data-rank="37">
+          <div class="card-head">
+            <div class="rank-mark">37</div>
+            <div>
+              <p class="bloodline">キラービューティ x ドレフォン</p>
+              <h3>キラービューティの24</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>スピードとパワーを伝えやすい父。芝ダート兼用の見立てや、早期から動けるかがポイント。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母キラービューティ。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠。父ドレフォン×母キラービューティという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/?pid=horse_list&amp;word=%E3%82%AD%E3%83%A9%E3%83%BC%E3%83%93%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%81%AE24" target="_blank" rel="noopener">netkeiba DB検索（個別ページ未特定）</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%AD%E3%83%A9%E3%83%BC%E3%83%93%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%81%AE24%20%E3%82%AD%E3%83%A9%E3%83%BC%E3%83%93%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%20%E3%83%89%E3%83%AC%E3%83%95%E3%82%A9%E3%83%B3%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-38" data-name="エリカプロヴァンス" data-dam="チェロキーメイドン" data-sire="キタサンブラック" data-rank="38">
+          <div class="card-head">
+            <div class="rank-mark">38</div>
+            <div>
+              <p class="bloodline">チェロキーメイドン x キタサンブラック</p>
+              <h3>エリカプロヴァンス</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/03/03 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>杉山晴紀 (栗)</strong></div><div class="fact"><span>生産者</span><strong>グランド牧場</strong></div><div class="fact"><span>馬主</span><strong>三木 正浩</strong></div><div class="fact"><span>馬名由来</span><strong>冠名＋フランスの地名</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母チェロキーメイドン。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父キタサンブラック×母チェロキーメイドンという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024104337/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024104337" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%A8%E3%83%AA%E3%82%AB%E3%83%97%E3%83%AD%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B9%20%E3%83%81%E3%82%A7%E3%83%AD%E3%82%AD%E3%83%BC%E3%83%A1%E3%82%A4%E3%83%89%E3%83%B3%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-39" data-name="ミッドナイトビズーの24" data-dam="ミッドナイトビズー" data-sire="キタサンブラック" data-rank="39">
+          <div class="card-head">
+            <div class="rank-mark">39</div>
+            <div>
+              <p class="bloodline">ミッドナイトビズー x キタサンブラック</p>
+              <h3>ミッドナイトビズーの24</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>米国の名牝。キタサンブラックとの配合は、海外牝馬のパワーと日本芝適性の変換が見どころ。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠。父キタサンブラック×母ミッドナイトビズーという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/?pid=horse_list&amp;word=%E3%83%9F%E3%83%83%E3%83%89%E3%83%8A%E3%82%A4%E3%83%88%E3%83%93%E3%82%BA%E3%83%BC%E3%81%AE24" target="_blank" rel="noopener">netkeiba DB検索（個別ページ未特定）</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%9F%E3%83%83%E3%83%89%E3%83%8A%E3%82%A4%E3%83%88%E3%83%93%E3%82%BA%E3%83%BC%E3%81%AE24%20%E3%83%9F%E3%83%83%E3%83%89%E3%83%8A%E3%82%A4%E3%83%88%E3%83%93%E3%82%BA%E3%83%BC%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-40" data-name="ソシアルクラブの24" data-dam="ソシアルクラブ" data-sire="キタサンブラック" data-rank="40">
+          <div class="card-head">
+            <div class="rank-mark">40</div>
+            <div>
+              <p class="bloodline">ソシアルクラブ x キタサンブラック</p>
+              <h3>ソシアルクラブの24</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>ブエナビスタの仔として血統表に物語がある母。キタサンブラックとの配合は、名牝系の継承を追う楽しさがある。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠。父キタサンブラック×母ソシアルクラブという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/?pid=horse_list&amp;word=%E3%82%BD%E3%82%B7%E3%82%A2%E3%83%AB%E3%82%AF%E3%83%A9%E3%83%96%E3%81%AE24" target="_blank" rel="noopener">netkeiba DB検索（個別ページ未特定）</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%BD%E3%82%B7%E3%82%A2%E3%83%AB%E3%82%AF%E3%83%A9%E3%83%96%E3%81%AE24%20%E3%82%BD%E3%82%B7%E3%82%A2%E3%83%AB%E3%82%AF%E3%83%A9%E3%83%96%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-41" data-name="ログポーズ" data-dam="プティフォリー" data-sire="キタサンブラック" data-rank="41">
+          <div class="card-head">
+            <div class="rank-mark">41</div>
+            <div>
+              <p class="bloodline">プティフォリー x キタサンブラック</p>
+              <h3>ログポーズ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母プティフォリー。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠。父キタサンブラック×母プティフォリーという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/?pid=horse_list&amp;word=%E3%83%AD%E3%82%B0%E3%83%9D%E3%83%BC%E3%82%BA" target="_blank" rel="noopener">netkeiba DB検索（個別ページ未特定）</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%AD%E3%82%B0%E3%83%9D%E3%83%BC%E3%82%BA%20%E3%83%97%E3%83%86%E3%82%A3%E3%83%95%E3%82%A9%E3%83%AA%E3%83%BC%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-42" data-name="ヴィルマリー" data-dam="レキシールー" data-sire="キタサンブラック" data-rank="42">
+          <div class="card-head">
+            <div class="rank-mark">42</div>
+            <div>
+              <p class="bloodline">レキシールー x キタサンブラック</p>
+              <h3>ヴィルマリー</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>カナダで高い実績を残した名牝。キタサンブラックとの組み合わせは、海外牝馬の底力を日本の芝でどう見せるか。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠。父キタサンブラック×母レキシールーという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/?pid=horse_list&amp;word=%E3%83%B4%E3%82%A3%E3%83%AB%E3%83%9E%E3%83%AA%E3%83%BC" target="_blank" rel="noopener">netkeiba DB検索（個別ページ未特定）</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%B4%E3%82%A3%E3%83%AB%E3%83%9E%E3%83%AA%E3%83%BC%20%E3%83%AC%E3%82%AD%E3%82%B7%E3%83%BC%E3%83%AB%E3%83%BC%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-43" data-name="ベラジオパンテーラ" data-dam="ダイワダッチェス" data-sire="キズナ" data-rank="43">
+          <div class="card-head">
+            <div class="rank-mark">43</div>
+            <div>
+              <p class="bloodline">ダイワダッチェス x キズナ</p>
+              <h3>ベラジオパンテーラ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/04/18 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>上村洋行 (栗)</strong></div><div class="fact"><span>生産者</span><strong>社台コーポレーション白老ファーム</strong></div><div class="fact"><span>馬主</span><strong>ベラジオレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>冠名＋豹（伊）</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>ディープインパクト後継として、芝中距離の持続力と完成度を期待しやすい父。クラシック路線でも堅実に候補を出すタイプとして見たい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母ダイワダッチェス。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父キズナ×母ダイワダッチェスという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024107026/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024107026" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%99%E3%83%A9%E3%82%B8%E3%82%AA%E3%83%91%E3%83%B3%E3%83%86%E3%83%BC%E3%83%A9%20%E3%83%80%E3%82%A4%E3%83%AF%E3%83%80%E3%83%83%E3%83%81%E3%82%A7%E3%82%B9%20%E3%82%AD%E3%82%BA%E3%83%8A%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-44" data-name="リリックラヴ" data-dam="エピックラヴ" data-sire="ロードカナロア" data-rank="44">
+          <div class="card-head">
+            <div class="rank-mark">44</div>
+            <div>
+              <p class="bloodline">エピックラヴ x ロードカナロア</p>
+              <h3>リリックラヴ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/08 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>武幸四郎 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>ＤＭＭドリームクラブ</strong></div><div class="fact"><span>馬名由来</span><strong>叙情詩＋母名の一部</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>スピードとマイル適性を軸に見やすい父。母系が中距離寄りなら、POG期間内の幅広い条件に対応できるかが楽しみ。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母エピックラヴ。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父ロードカナロア×母エピックラヴという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106227/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106227" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%B4%20%E3%82%A8%E3%83%94%E3%83%83%E3%82%AF%E3%83%A9%E3%83%B4%20%E3%83%AD%E3%83%BC%E3%83%89%E3%82%AB%E3%83%8A%E3%83%AD%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-45" data-name="キトゥンズクラフト" data-dam="ダンスウィズキトゥン" data-sire="オルフェーヴル" data-rank="45">
+          <div class="card-head">
+            <div class="rank-mark">45</div>
+            <div>
+              <p class="bloodline">ダンスウィズキトゥン x オルフェーヴル</p>
+              <h3>キトゥンズクラフト</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>スタミナ、底力、個性が強い父。母系のスピードが乗るとPOG期間でも面白い。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母ダンスウィズキトゥン。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠。父オルフェーヴル×母ダンスウィズキトゥンという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/?pid=horse_list&amp;word=%E3%82%AD%E3%83%88%E3%82%A5%E3%83%B3%E3%82%BA%E3%82%AF%E3%83%A9%E3%83%95%E3%83%88" target="_blank" rel="noopener">netkeiba DB検索（個別ページ未特定）</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%AD%E3%83%88%E3%82%A5%E3%83%B3%E3%82%BA%E3%82%AF%E3%83%A9%E3%83%95%E3%83%88%20%E3%83%80%E3%83%B3%E3%82%B9%E3%82%A6%E3%82%A3%E3%82%BA%E3%82%AD%E3%83%88%E3%82%A5%E3%83%B3%20%E3%82%AA%E3%83%AB%E3%83%95%E3%82%A7%E3%83%BC%E3%83%B4%E3%83%AB%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-46" data-name="コナパームス" data-dam="コナブリュワーズ" data-sire="アドマイヤマーズ" data-rank="46">
+          <div class="card-head">
+            <div class="rank-mark">46</div>
+            <div>
+              <p class="bloodline">コナブリュワーズ x アドマイヤマーズ</p>
+              <h3>コナパームス</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/01/25 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>森一誠 (美)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>サンデーレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>母名の一部＋ヤシの木</strong></div><div class="fact"><span>人気</span><strong>19位 / 指名数 18 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>香港マイルなどを勝ったマイルG1馬。初期の産駒評価ではスピードと完成度を中心に見たい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母コナブリュワーズ。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 19位（指名数 18） / 血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父アドマイヤマーズ×母コナブリュワーズという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106309/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106309" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%B3%E3%83%8A%E3%83%91%E3%83%BC%E3%83%A0%E3%82%B9%20%E3%82%B3%E3%83%8A%E3%83%96%E3%83%AA%E3%83%A5%E3%83%AF%E3%83%BC%E3%82%BA%20%E3%82%A2%E3%83%89%E3%83%9E%E3%82%A4%E3%83%A4%E3%83%9E%E3%83%BC%E3%82%BA%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-47" data-name="レッドインサイト" data-dam="ダンシングラグズ" data-sire="エピファネイア" data-rank="47">
+          <div class="card-head">
+            <div class="rank-mark">47</div>
+            <div>
+              <p class="bloodline">ダンシングラグズ x エピファネイア</p>
+              <h3>レッドインサイト</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/03/29 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>栗毛</strong></div><div class="fact"><span>厩舎</span><strong>手塚貴久 (美)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>東京ホースレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>冠名＋洞察力</strong></div><div class="fact"><span>人気</span><strong>49位 / 指名数 12 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>シーザリオの血を通じたクラシック感が強い父。大物感が魅力で、母系のスピードや気性面との組み合わせを読むのが楽しい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>米G1アルシバイアディーズS勝ち馬。エピファネイアとの配合は、パワーと芝中距離適性の読み比べが楽しい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 49位（指名数 12） / 血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父エピファネイア×母ダンシングラグズという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106449/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106449" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%AC%E3%83%83%E3%83%89%E3%82%A4%E3%83%B3%E3%82%B5%E3%82%A4%E3%83%88%20%E3%83%80%E3%83%B3%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%A9%E3%82%B0%E3%82%BA%20%E3%82%A8%E3%83%94%E3%83%95%E3%82%A1%E3%83%8D%E3%82%A4%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-48" data-name="ルーメンルーナエ" data-dam="ルリアナ" data-sire="エピファネイア" data-rank="48">
+          <div class="card-head">
+            <div class="rank-mark">48</div>
+            <div>
+              <p class="bloodline">ルリアナ x エピファネイア</p>
+              <h3>ルーメンルーナエ</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牡</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/17 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>中内田充 (栗)</strong></div><div class="fact"><span>生産者</span><strong>社台ファーム</strong></div><div class="fact"><span>馬主</span><strong>社台レースホース</strong></div><div class="fact"><span>馬名由来</span><strong>月光（ラテン語）</strong></div><div class="fact"><span>人気</span><strong>32位 / 指名数 15 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>シーザリオの血を通じたクラシック感が強い父。大物感が魅力で、母系のスピードや気性面との組み合わせを読むのが楽しい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母ルリアナ。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 32位（指名数 15） / 血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父エピファネイア×母ルリアナという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106080/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106080" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%AB%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%AB%E3%83%BC%E3%83%8A%E3%82%A8%20%E3%83%AB%E3%83%AA%E3%82%A2%E3%83%8A%20%E3%82%A8%E3%83%94%E3%83%95%E3%82%A1%E3%83%8D%E3%82%A4%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-49" data-name="ベルバーニア" data-dam="アドマイヤローザ" data-sire="キタサンブラック" data-rank="49">
+          <div class="card-head">
+            <div class="rank-mark">49</div>
+            <div>
+              <p class="bloodline">アドマイヤローザ x キタサンブラック</p>
+              <h3>ベルバーニア</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>未確認</strong></div><div class="fact"><span>生年月日</span><strong>未確認</strong></div><div class="fact"><span>毛色</span><strong>未確認</strong></div><div class="fact"><span>厩舎</span><strong>未確認</strong></div><div class="fact"><span>生産者</span><strong>未確認</strong></div><div class="fact"><span>馬主</span><strong>未確認</strong></div><div class="fact"><span>馬名由来</span><strong>未確認</strong></div><div class="fact"><span>人気</span><strong>ランキング表では未確認</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>中長距離の持続力と大舞台感を連想しやすい種牡馬。イクイノックス以降、POGでは「クラシックまで待てる大物枠」として見られやすい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母アドマイヤローザ。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>血統や媒体評価を掘ると面白いリスト後半枠。父キタサンブラック×母アドマイヤローザという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。<br><br>注: POG-INFOの馬名候補検索では、2024年産かつ父名一致の個別ページを確認できなかった。クラブ公式、セール情報、ニュース記事で追加確認したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/?pid=horse_list&amp;word=%E3%83%99%E3%83%AB%E3%83%90%E3%83%BC%E3%83%8B%E3%82%A2" target="_blank" rel="noopener">netkeiba DB検索（個別ページ未特定）</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%83%99%E3%83%AB%E3%83%90%E3%83%BC%E3%83%8B%E3%82%A2%20%E3%82%A2%E3%83%89%E3%83%9E%E3%82%A4%E3%83%A4%E3%83%AD%E3%83%BC%E3%82%B6%20%E3%82%AD%E3%82%BF%E3%82%B5%E3%83%B3%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+
+        <article class="horse-card" id="horse-50" data-name="エターナルバラード" data-dam="バラーディスト" data-sire="ロードカナロア" data-rank="50">
+          <div class="card-head">
+            <div class="rank-mark">50</div>
+            <div>
+              <p class="bloodline">バラーディスト x ロードカナロア</p>
+              <h3>エターナルバラード</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/03/04 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>鹿毛</strong></div><div class="fact"><span>厩舎</span><strong>武幸四郎 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>シルクレーシング</strong></div><div class="fact"><span>馬名由来</span><strong>永遠のバラード。母名より連想</strong></div><div class="fact"><span>人気</span><strong>25位 / 指名数 17 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>スピードとマイル適性を軸に見やすい父。母系が中距離寄りなら、POG期間内の幅広い条件に対応できるかが楽しみ。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>入力リストでは母バラーディスト。競走実績、産駒実績、近親の重賞実績は追加確認したい。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>POG-INFO指名人気 25位（指名数 17） / 血統や媒体評価を掘ると面白いリスト後半枠 / POG-INFO個別ページ確認済み。父ロードカナロア×母バラーディストという入力リストの血統設定を軸に、デビュー時期、厩舎コメント、ゲート試験、調教時計が出てきたら評価を更新したい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106505/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106505" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%A8%E3%82%BF%E3%83%BC%E3%83%8A%E3%83%AB%E3%83%90%E3%83%A9%E3%83%BC%E3%83%89%20%E3%83%90%E3%83%A9%E3%83%BC%E3%83%87%E3%82%A3%E3%82%B9%E3%83%88%20%E3%83%AD%E3%83%BC%E3%83%89%E3%82%AB%E3%83%8A%E3%83%AD%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
+        </div>
+      </section>
+    </main>
+    <footer class="site page-foot">
+      <p>出典や画像の公開可否は、公開前に各リンク先で再確認してください。元データは <a href="pog-2026-2027.md">Markdown版</a> にも残しています。</p>
+    </footer>
+    <a class="to-top" href="#top" aria-label="ページ上部へ戻る">↑</a>
+    <script>
+      const cards = Array.from(document.querySelectorAll('.horse-card'));
+      const search = document.getElementById('horseSearch');
+      const jump = document.getElementById('horseJump');
+      const count = document.getElementById('resultCount');
+      const empty = document.getElementById('emptyState');
+      function normalize(value) {
+        return value.toLocaleLowerCase('ja-JP').replace(/\s+/g, '');
+      }
+      function updateCount() {
+        const visible = cards.filter((card) => !card.hidden).length;
+        count.textContent = `${visible}頭を表示中`;
+        empty.classList.toggle('is-visible', visible === 0);
+      }
+      function applySearch() {
+        const query = normalize(search.value);
+        cards.forEach((card) => {
+          const haystack = normalize(`${card.dataset.name} ${card.dataset.dam} ${card.dataset.sire}`);
+          card.hidden = query !== '' && !haystack.includes(query);
+        });
+        updateCount();
+      }
+      jump.addEventListener('change', () => {
+        const id = jump.value;
+        if (!id) return;
+        search.value = '';
+        applySearch();
+        document.getElementById(id)?.scrollIntoView({ block: 'start' });
+      });
+      search.addEventListener('input', applySearch);
+      document.getElementById('showAll').addEventListener('click', () => {
+        search.value = '';
+        cards.forEach((card) => { card.hidden = false; });
+        updateCount();
+      });
+      document.getElementById('topTen').addEventListener('click', () => {
+        search.value = '';
+        cards.forEach((card) => { card.hidden = Number(card.dataset.rank) > 10; });
+        updateCount();
+        document.getElementById('cards-title').scrollIntoView({ block: 'start' });
+      });
+      document.querySelectorAll('.quick-chip').forEach((button) => {
+        button.addEventListener('click', () => {
+          search.value = '';
+          applySearch();
+          document.getElementById(button.dataset.target)?.scrollIntoView({ block: 'start' });
+        });
+      });
+      updateCount();
+    </script>
+  </body>
+</html>
