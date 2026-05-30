@@ -128,7 +128,7 @@
       .menu-open { overflow: hidden; }
       .memo-modal { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 20px; background: rgb(37 34 29 / 48%); }
       .memo-modal[hidden] { display: none; }
-      .memo-dialog { width: min(520px, 100%); max-height: calc(100vh - 40px); overflow: auto; padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: 0 24px 70px rgb(37 34 29 / 28%); }
+      .memo-dialog { width: min(520px, 100%); max-height: calc(100vh - 40px); max-height: calc(100dvh - 40px); overflow: auto; padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: 0 24px 70px rgb(37 34 29 / 28%); }
       .memo-dialog header { display: flex; gap: 12px; align-items: start; justify-content: space-between; margin-bottom: 16px; }
       .memo-dialog h2 { margin: 0; font-size: 1.35rem; line-height: 1.35; }
       .memo-dialog p { margin: 4px 0 0; color: var(--muted); font-size: .9rem; }
@@ -154,6 +154,10 @@
         .cards-head { display: block; }
         .cards-head .add-custom-button { margin-top: 12px; }
         .card-tools button { flex: 1; }
+        .memo-modal { place-items: start center; padding: 12px 12px 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .memo-dialog { max-height: none; overflow: visible; margin-bottom: 55vh; }
+        .memo-actions { flex-wrap: wrap; }
+        .memo-actions button { flex: 1 1 100%; }
       }
       @media (max-width: 920px) {
         .site { width: min(100% - 28px, 1180px); }
