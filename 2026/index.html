@@ -98,7 +98,7 @@
       .horse-card.is-taken { border-color: #c9c4bd; background: var(--taken-soft); box-shadow: none; opacity: .62; }
       .horse-card.is-taken .card-head { background: linear-gradient(90deg, #e2dfda, transparent 72%); }
       .horse-card.is-taken h3, .horse-card.is-taken .bloodline { color: var(--taken); text-decoration: line-through; }
-      .horse-card.is-taken .fact-grid, .horse-card.is-taken .note-grid, .horse-card.is-taken .pog-note, .horse-card.is-taken .refs { filter: grayscale(1); }
+      .horse-card.is-taken .fact-grid, .horse-card.is-taken .note-grid, .horse-card.is-taken .pog-note, .horse-card.is-taken .refs, .horse-card.is-taken .card-memo-note { filter: grayscale(1); }
       .card-head { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 16px; align-items: center; padding: 22px; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, var(--green-soft), transparent 72%); }
       .rank-mark { display: grid; place-items: center; width: 58px; aspect-ratio: 1; border: 1px solid rgb(18 93 82 / 28%); border-radius: 50%; color: var(--green); background: var(--paper); font-size: 1.2rem; font-weight: 900; }
       .bloodline { margin: 0 0 5px; color: var(--muted); font-size: .9rem; font-weight: 700; overflow-wrap: anywhere; }
@@ -142,6 +142,10 @@
       .horse-card.is-custom .card-head { background: linear-gradient(90deg, rgb(166 111 31 / 12%), transparent 72%); }
       .card-tools { display: flex; gap: 8px; justify-content: flex-end; padding: 14px 22px 18px; border-top: 1px solid var(--line); }
       .card-tools button { min-height: 36px; padding: 5px 14px; font-size: .82rem; }
+      .card-memo-note { padding: 16px 22px; border-top: 1px solid var(--line); background: var(--blue-soft); }
+      .card-memo-note h4 { color: var(--blue); }
+      .card-memo-note p { margin: 0; color: var(--ink); font-size: .96rem; white-space: pre-wrap; }
+      .card-memo-note + .card-memo-actions { border-top: none; padding-top: 4px; }
       .card-memo-actions { display: flex; gap: 8px; justify-content: flex-end; padding: 10px 22px 14px; border-top: 1px solid var(--line); }
       .card-memo-actions button { min-height: 34px; padding: 4px 14px; font-size: .82rem; }
       .card-tools + .card-memo-actions { border-top: none; padding-top: 4px; }
@@ -2390,6 +2394,22 @@
 
             tools.append(memoBtn, takenBtn);
             card.append(tools);
+          }
+
+          let memoNote = card.querySelector('.card-memo-note');
+          if (hasSavedNote) {
+            if (!memoNote) {
+              memoNote = document.createElement('section');
+              memoNote.className = 'card-memo-note';
+              const heading = document.createElement('h4');
+              heading.textContent = '個人メモ';
+              const body = document.createElement('p');
+              memoNote.append(heading, body);
+              card.insertBefore(memoNote, tools);
+            }
+            memoNote.querySelector('p').textContent = notesById[card.id];
+          } else if (memoNote) {
+            memoNote.remove();
           }
 
           const [memoBtn, takenBtn] = tools.querySelectorAll('button');
