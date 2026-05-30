@@ -21,6 +21,8 @@
         --blue-soft: #e3edf5;
         --gold: #a66f1f;
         --shadow: 0 18px 42px rgb(47 36 22 / 12%);
+        --taken: #8a8580;
+        --taken-soft: #efede9;
       }
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
@@ -47,23 +49,43 @@
       .stat strong { display: block; font-size: 2rem; line-height: 1; }
       .stat span { display: block; margin-top: 6px; color: var(--muted); font-size: .86rem; }
       .toolbar-wrap { position: sticky; top: 0; z-index: 10; border-block: 1px solid rgb(221 213 199 / 90%); background: rgb(247 244 236 / 94%); backdrop-filter: blur(10px); }
-      .toolbar { display: grid; grid-template-columns: minmax(220px, .9fr) minmax(280px, 1.2fr); gap: 12px; align-items: center; padding: 14px 0; }
+      .toolbar { display: grid; grid-template-columns: minmax(220px, .9fr) minmax(280px, 1.2fr) minmax(220px, .9fr); gap: 12px; align-items: end; padding: 14px 0; }
       label { display: grid; gap: 4px; color: var(--muted); font-size: .78rem; font-weight: 700; }
       select, input { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; background: var(--paper); color: var(--ink); font: inherit; }
       select:focus, input:focus, button:focus-visible, a:focus-visible { outline: 3px solid rgb(18 93 82 / 22%); outline-offset: 2px; }
       button { min-height: 44px; border: 1px solid rgb(18 93 82 / 24%); border-radius: 8px; padding: 8px 13px; background: var(--green); color: white; font: inherit; font-weight: 800; cursor: pointer; }
-      .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 28px; align-items: start; padding: 30px 0 56px; }
+      button:hover { filter: brightness(.98); }
+      button:disabled { cursor: not-allowed; opacity: .45; }
+      .ghost-button { border-color: var(--line); color: var(--green); background: var(--paper); }
+      .draft-tools { display: grid; gap: 6px; }
+      .draft-tools span { color: var(--muted); font-size: .78rem; font-weight: 700; }
+      .draft-tool-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .layout { display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 28px; align-items: start; padding: 30px 0 56px; }
       .index-panel { position: sticky; top: 106px; padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: rgb(255 253 248 / 88%); box-shadow: 0 10px 26px rgb(47 36 22 / 8%); }
       .index-panel h2, .section-title { margin: 0; font-size: 1.2rem; line-height: 1.3; }
       .index-panel p { margin: 8px 0 14px; color: var(--muted); font-size: .9rem; }
-      .table-scroll { max-height: calc(100vh - 190px); overflow: auto; border-top: 1px solid var(--line); }
+      .table-scroll { max-height: calc(100vh - 240px); overflow: auto; border-top: 1px solid var(--line); }
       table { width: 100%; border-collapse: collapse; font-size: .86rem; }
       th, td { padding: 8px 6px; border-bottom: 1px solid rgb(221 213 199 / 72%); text-align: left; vertical-align: top; }
       th:first-child, td:first-child { width: 42px; text-align: right; color: var(--gold); font-weight: 800; }
       td a { color: var(--green); font-weight: 800; text-decoration: none; }
+      tr.is-taken { color: var(--taken); background: rgb(239 237 233 / 72%); }
+      tr.is-taken a { color: var(--taken); text-decoration: line-through; }
+      tr.is-dragging { opacity: .42; }
+      tr.drag-over { box-shadow: inset 0 2px 0 rgb(18 93 82 / 46%); }
+      .rank-cell { display: flex; gap: 6px; align-items: center; justify-content: flex-end; }
+      .drag-handle { display: inline-grid; place-items: center; width: 26px; min-width: 26px; height: 30px; border: 0; border-radius: 7px; color: var(--muted); background: transparent; cursor: grab; touch-action: none; user-select: none; }
+      .drag-handle:active { cursor: grabbing; }
+      .row-actions { display: grid; grid-template-columns: minmax(38px, 1fr); gap: 4px; min-width: 42px; }
+      .row-actions button { min-height: 34px; padding: 4px 8px; font-size: .76rem; white-space: nowrap; }
+      .taken-button[aria-pressed="true"] { border-color: #9d9892; color: white; background: var(--taken); }
       .cards { display: grid; gap: 18px; }
       .horse-card { scroll-margin-top: 112px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: var(--shadow); overflow: hidden; }
       .horse-card[hidden] { display: none; }
+      .horse-card.is-taken { border-color: #c9c4bd; background: var(--taken-soft); box-shadow: none; opacity: .62; }
+      .horse-card.is-taken .card-head { background: linear-gradient(90deg, #e2dfda, transparent 72%); }
+      .horse-card.is-taken h3, .horse-card.is-taken .bloodline { color: var(--taken); text-decoration: line-through; }
+      .horse-card.is-taken .fact-grid, .horse-card.is-taken .note-grid, .horse-card.is-taken .pog-note, .horse-card.is-taken .refs { filter: grayscale(1); }
       .card-head { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 16px; align-items: center; padding: 22px; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, var(--green-soft), transparent 72%); }
       .rank-mark { display: grid; place-items: center; width: 58px; aspect-ratio: 1; border: 1px solid rgb(18 93 82 / 28%); border-radius: 50%; color: var(--green); background: var(--paper); font-size: 1.2rem; font-weight: 900; }
       .bloodline { margin: 0 0 5px; color: var(--muted); font-size: .9rem; font-weight: 700; overflow-wrap: anywhere; }
@@ -93,9 +115,12 @@
         .site { width: min(100% - 28px, 1180px); }
         .hero-grid, .layout { grid-template-columns: 1fr; }
         .stats { grid-template-columns: repeat(4, 1fr); }
+        .toolbar-wrap { position: static; }
         .index-panel { position: static; }
         .table-scroll { max-height: 360px; }
         .toolbar { grid-template-columns: 1fr; }
+        .horse-card { scroll-margin-top: 20px; }
+        .draft-tool-buttons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
       @media (max-width: 640px) {
         .hero { padding-top: 28px; }
@@ -104,6 +129,12 @@
         .stat strong { font-size: 1.6rem; }
         .card-head { grid-template-columns: 54px minmax(0, 1fr); padding: 18px; }
         .rank-mark { width: 46px; font-size: 1rem; }
+        .ranking-dam, .ranking-sire { display: none; }
+        .table-scroll { max-height: 60vh; }
+        th, td { padding: 7px 4px; }
+        th:first-child, td:first-child { width: 52px; }
+        .row-actions { min-width: 42px; }
+        .row-actions button { font-size: .72rem; }
         .fact-grid { grid-template-columns: repeat(2, 1fr); }
         .fact:nth-child(4n) { border-right: 1px solid rgb(221 213 199 / 72%); }
         .fact:nth-child(2n) { border-right: 0; }
@@ -193,17 +224,24 @@
           <label>馬名・母・父で絞り込み
             <input id="horseSearch" type="search" placeholder="例: キタサンブラック、アーモンドアイ">
           </label>
+          <div class="draft-tools" aria-label="ドラフト用保存操作">
+            <span id="draftStatus">並び順と指名済みはこの端末に保存されます</span>
+            <div class="draft-tool-buttons">
+              <button class="ghost-button" id="resetOrder" type="button">並び順を戻す</button>
+              <button class="ghost-button" id="clearTaken" type="button">指名済みを解除</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <main class="site layout">
       <aside class="index-panel" aria-labelledby="ranking-title">
         <h2 id="ranking-title">表示順一覧</h2>
-        <p>馬名を押すとカードへ移動します。スマホではこの一覧も横幅内に収まります。</p>
+        <p>行をドラッグして並べ替えできます。済を押すと指名済みとしてグレーアウトします。</p>
         <div class="table-scroll">
           <table>
-            <thead><tr><th>位</th><th>馬名</th><th>母</th><th>父</th></tr></thead>
-            <tbody><tr><td>1</td><td><a href="#horse-01">ジャンゴッド</a></td><td>マーゴットディド</td><td>キタサンブラック</td></tr>
+            <thead><tr><th>位</th><th>馬名</th><th class="ranking-dam">母</th><th class="ranking-sire">父</th><th>操作</th></tr></thead>
+            <tbody id="rankingBody"><tr><td>1</td><td><a href="#horse-01">ジャンゴッド</a></td><td>マーゴットディド</td><td>キタサンブラック</td></tr>
 <tr><td>2</td><td><a href="#horse-02">エルドボルグ</a></td><td>コンサートホール</td><td>キタサンブラック</td></tr>
 <tr><td>3</td><td><a href="#horse-03">ソブリオ</a></td><td>ノームコア</td><td>キタサンブラック</td></tr>
 <tr><td>4</td><td><a href="#horse-04">チェスティーノ</a></td><td>チェッキーノ</td><td>エフフォーリア</td></tr>
@@ -1596,19 +1634,232 @@
     </footer>
     <a class="to-top" href="#top" aria-label="ページ上部へ戻る">↑</a>
     <script>
-      const cards = Array.from(document.querySelectorAll('.horse-card'));
+      const storageKeys = {
+        order: 'pog-2026-draft-order',
+        taken: 'pog-2026-draft-taken',
+      };
+      const cardsContainer = document.getElementById('horseCards');
       const search = document.getElementById('horseSearch');
       const jump = document.getElementById('horseJump');
       const count = document.getElementById('resultCount');
       const empty = document.getElementById('emptyState');
+      const rankingBody = document.getElementById('rankingBody');
+      const draftStatus = document.getElementById('draftStatus');
+      const resetOrder = document.getElementById('resetOrder');
+      const clearTaken = document.getElementById('clearTaken');
+      const originalCards = Array.from(document.querySelectorAll('.horse-card'));
+      const originalIds = originalCards.map((card) => card.id);
+      const cardById = new Map(originalCards.map((card) => [card.id, card]));
+      let cards = [...originalCards];
+      let takenIds = new Set(readStoredArray(storageKeys.taken));
+      let draggedId = '';
+
+      function readStoredArray(key) {
+        try {
+          const value = JSON.parse(localStorage.getItem(key) || '[]');
+          return Array.isArray(value) ? value : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function writeStoredArray(key, value) {
+        try {
+          localStorage.setItem(key, JSON.stringify(value));
+        } catch {
+          draftStatus.textContent = 'このブラウザでは保存できませんでした';
+        }
+      }
+
+      function removeStoredItem(key) {
+        try {
+          localStorage.removeItem(key);
+        } catch {
+          draftStatus.textContent = 'このブラウザでは保存状態を更新できませんでした';
+        }
+      }
+
       function normalize(value) {
         return value.toLocaleLowerCase('ja-JP').replace(/\s+/g, '');
       }
+
+      function numberLabel(index) {
+        return String(index + 1).padStart(2, '0');
+      }
+
+      function restoreSavedOrder() {
+        const savedIds = readStoredArray(storageKeys.order).filter((id) => cardById.has(id));
+        const missingIds = originalIds.filter((id) => !savedIds.includes(id));
+        cards = [...savedIds, ...missingIds].map((id) => cardById.get(id));
+      }
+
+      function saveOrder() {
+        writeStoredArray(storageKeys.order, cards.map((card) => card.id));
+      }
+
+      function saveTaken() {
+        writeStoredArray(storageKeys.taken, [...takenIds]);
+      }
+
+      function moveCardToIndex(card, targetIndex) {
+        const currentIndex = cards.indexOf(card);
+        if (currentIndex < 0 || currentIndex === targetIndex) return;
+        const [movedCard] = cards.splice(currentIndex, 1);
+        const safeTargetIndex = Math.max(0, Math.min(targetIndex, cards.length));
+        cards.splice(safeTargetIndex, 0, movedCard);
+        saveOrder();
+        renderOrder();
+      }
+
+      function toggleTaken(id) {
+        if (takenIds.has(id)) {
+          takenIds.delete(id);
+        } else {
+          takenIds.add(id);
+        }
+        saveTaken();
+        renderTaken();
+        renderRanking();
+        updateCount();
+      }
+
+      function renderTaken() {
+        cards.forEach((card) => {
+          const isTaken = takenIds.has(card.id);
+          card.classList.toggle('is-taken', isTaken);
+        });
+        draftStatus.textContent = `指名済み ${takenIds.size}頭 / 並び順と指名済みはこの端末に保存されます`;
+      }
+
+      function renderOrder() {
+        cards.forEach((card, index) => {
+          cardsContainer.append(card);
+          card.querySelector('.rank-mark').textContent = numberLabel(index);
+        });
+        renderJump();
+        renderTaken();
+        renderRanking();
+        applySearch();
+      }
+
+      function renderJump() {
+        const selected = jump.value;
+        jump.textContent = '';
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = '馬を選択';
+        jump.append(defaultOption);
+        cards.forEach((card, index) => {
+          const option = document.createElement('option');
+          option.value = card.id;
+          option.textContent = `${numberLabel(index)}. ${card.dataset.name}`;
+          jump.append(option);
+        });
+        jump.value = cardById.has(selected) ? selected : '';
+      }
+
+      function renderRanking() {
+        rankingBody.textContent = '';
+        cards.forEach((card, index) => {
+          const row = document.createElement('tr');
+          const isTaken = takenIds.has(card.id);
+          row.dataset.id = card.id;
+          row.draggable = true;
+          row.classList.toggle('is-taken', isTaken);
+          row.addEventListener('dragstart', (event) => {
+            if (event.target.closest('button, a')) {
+              event.preventDefault();
+              return;
+            }
+            draggedId = card.id;
+            event.dataTransfer.effectAllowed = 'move';
+            event.dataTransfer.setData('text/plain', card.id);
+            window.requestAnimationFrame(() => row.classList.add('is-dragging'));
+          });
+          row.addEventListener('dragend', () => {
+            draggedId = '';
+            document.querySelectorAll('tr.is-dragging, tr.drag-over').forEach((activeRow) => {
+              activeRow.classList.remove('is-dragging', 'drag-over');
+            });
+          });
+          row.addEventListener('dragover', (event) => {
+            if (!draggedId || draggedId === card.id) return;
+            event.preventDefault();
+            row.classList.add('drag-over');
+          });
+          row.addEventListener('dragleave', () => {
+            row.classList.remove('drag-over');
+          });
+          row.addEventListener('drop', (event) => {
+            event.preventDefault();
+            row.classList.remove('drag-over');
+            const sourceId = draggedId || event.dataTransfer.getData('text/plain');
+            const sourceCard = cardById.get(sourceId);
+            if (!sourceCard || sourceCard === card) return;
+            const rect = row.getBoundingClientRect();
+            const shouldInsertAfter = event.clientY > rect.top + rect.height / 2;
+            const sourceIndex = cards.indexOf(sourceCard);
+            let targetIndex = cards.indexOf(card) + (shouldInsertAfter ? 1 : 0);
+            if (sourceIndex < targetIndex) targetIndex -= 1;
+            moveCardToIndex(sourceCard, targetIndex);
+          });
+
+          const rankCell = document.createElement('td');
+          const rankWrap = document.createElement('span');
+          rankWrap.className = 'rank-cell';
+
+          const dragHandle = document.createElement('span');
+          dragHandle.className = 'drag-handle';
+          dragHandle.textContent = '≡';
+          dragHandle.setAttribute('aria-label', `${card.dataset.name}をドラッグして移動`);
+          dragHandle.title = 'ドラッグして移動';
+
+          const rankNumber = document.createElement('span');
+          rankNumber.textContent = String(index + 1);
+          rankWrap.append(dragHandle, rankNumber);
+          rankCell.append(rankWrap);
+
+          const nameCell = document.createElement('td');
+          const link = document.createElement('a');
+          link.href = `#${card.id}`;
+          link.textContent = card.dataset.name;
+          nameCell.append(link);
+
+          const damCell = document.createElement('td');
+          damCell.className = 'ranking-dam';
+          damCell.textContent = card.dataset.dam;
+
+          const sireCell = document.createElement('td');
+          sireCell.className = 'ranking-sire';
+          sireCell.textContent = card.dataset.sire;
+
+          const actionCell = document.createElement('td');
+          const actionGroup = document.createElement('div');
+          actionGroup.className = 'row-actions';
+
+          const takenButton = document.createElement('button');
+          takenButton.type = 'button';
+          takenButton.className = 'taken-button';
+          takenButton.textContent = '済';
+          takenButton.setAttribute('aria-pressed', String(isTaken));
+          takenButton.title = isTaken ? '指名済みを解除' : '他の人に取られた馬としてグレーアウト';
+          takenButton.addEventListener('click', () => toggleTaken(card.id));
+
+          actionGroup.append(takenButton);
+          actionCell.append(actionGroup);
+
+          row.append(rankCell, nameCell, damCell, sireCell, actionCell);
+          rankingBody.append(row);
+        });
+      }
+
       function updateCount() {
         const visible = cards.filter((card) => !card.hidden).length;
-        count.textContent = `${visible}頭を表示中`;
+        const visibleTaken = cards.filter((card) => !card.hidden && takenIds.has(card.id)).length;
+        count.textContent = `${visible}頭を表示中（指名済み ${visibleTaken}頭）`;
         empty.classList.toggle('is-visible', visible === 0);
       }
+
       function applySearch() {
         const query = normalize(search.value);
         cards.forEach((card) => {
@@ -1617,6 +1868,7 @@
         });
         updateCount();
       }
+
       jump.addEventListener('change', () => {
         const id = jump.value;
         if (!id) return;
@@ -1625,7 +1877,21 @@
         document.getElementById(id)?.scrollIntoView({ block: 'start' });
       });
       search.addEventListener('input', applySearch);
-      updateCount();
+      resetOrder.addEventListener('click', () => {
+        cards = [...originalCards];
+        removeStoredItem(storageKeys.order);
+        renderOrder();
+      });
+      clearTaken.addEventListener('click', () => {
+        takenIds = new Set();
+        removeStoredItem(storageKeys.taken);
+        renderTaken();
+        renderRanking();
+        updateCount();
+      });
+
+      restoreSavedOrder();
+      renderOrder();
     </script>
   </body>
 </html>
