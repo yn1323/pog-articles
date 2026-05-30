@@ -155,7 +155,7 @@
         .cards-head .add-custom-button { margin-top: 12px; }
         .card-tools button { flex: 1; }
         .memo-modal { place-items: start center; padding: 12px 12px 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-        .memo-dialog { max-height: none; overflow: visible; margin-bottom: 55vh; }
+        .memo-dialog { max-height: none; overflow: visible; margin-bottom: 30vh; }
         .memo-actions { flex-wrap: wrap; }
         .memo-actions button { flex: 1 1 100%; }
       }
@@ -2093,6 +2093,21 @@
         return result;
       }
 
+      function fitModalToViewport() {
+        const viewport = window.visualViewport;
+        [memoModal, customModal].forEach((modal) => {
+          if (modal.hidden || !viewport) {
+            modal.style.top = '';
+            modal.style.bottom = '';
+            modal.style.height = '';
+            return;
+          }
+          modal.style.top = `${viewport.offsetTop}px`;
+          modal.style.bottom = 'auto';
+          modal.style.height = `${viewport.height}px`;
+        });
+      }
+
       function openCustomModal(id) {
         editingCustomId = id || '';
         customError.textContent = '';
@@ -2105,6 +2120,7 @@
         customDelete.hidden = !horse;
         customModal.hidden = false;
         document.body.classList.add('modal-open');
+        fitModalToViewport();
         customInputs.name.focus();
       }
 
@@ -2112,6 +2128,7 @@
         editingCustomId = '';
         customModal.hidden = true;
         document.body.classList.remove('modal-open');
+        fitModalToViewport();
       }
 
       function submitCustomForm() {
@@ -2322,6 +2339,7 @@
         memoInput.value = notesById[id] || '';
         memoModal.hidden = false;
         document.body.classList.add('modal-open');
+        fitModalToViewport();
         memoInput.focus();
       }
 
@@ -2329,6 +2347,7 @@
         activeMemoId = '';
         memoModal.hidden = true;
         document.body.classList.remove('modal-open');
+        fitModalToViewport();
       }
 
       function storeActiveMemo() {
@@ -2629,6 +2648,10 @@
         if (event.key === 'Escape' && !customModal.hidden) closeCustomModal();
         if (event.key === 'Escape' && rankingPanel.classList.contains('is-open')) closeRankingMenu();
       });
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', fitModalToViewport);
+        window.visualViewport.addEventListener('scroll', fitModalToViewport);
+      }
 
       restoreSavedOrder();
       renderOrder();
