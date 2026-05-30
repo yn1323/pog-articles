@@ -1749,6 +1749,9 @@
       let notesById = readStoredObject(storageKeys.notes);
       let activeMemoId = '';
       let draggedId = '';
+      let touchDragId = '';
+      let touchOverRow = null;
+      let touchInsertAfter = false;
 
       function readStoredArray(key) {
         try {
@@ -2067,6 +2070,57 @@
           dragHandle.textContent = '≡';
           dragHandle.setAttribute('aria-label', `${card.dataset.name}をドラッグして移動`);
           dragHandle.title = 'ドラッグして移動';
+
+          const clearTouchDrag = () => {
+            touchDragId = '';
+            touchOverRow = null;
+            rankingBody.querySelectorAll('tr.is-dragging, tr.drag-over').forEach((activeRow) => {
+              activeRow.classList.remove('is-dragging', 'drag-over');
+            });
+          };
+          dragHandle.addEventListener('touchstart', (event) => {
+            if (event.touches.length !== 1) return;
+            event.preventDefault();
+            touchDragId = card.id;
+            touchOverRow = null;
+            row.classList.add('is-dragging');
+          }, { passive: false });
+          dragHandle.addEventListener('touchmove', (event) => {
+            if (touchDragId !== card.id) return;
+            event.preventDefault();
+            const touch = event.touches[0];
+            const target = document.elementFromPoint(touch.clientX, touch.clientY);
+            const overRow = target ? target.closest('tr') : null;
+            rankingBody.querySelectorAll('tr.drag-over').forEach((activeRow) => {
+              activeRow.classList.remove('drag-over');
+            });
+            if (overRow && overRow !== row && overRow.parentElement === rankingBody) {
+              overRow.classList.add('drag-over');
+              touchOverRow = overRow;
+              const rect = overRow.getBoundingClientRect();
+              touchInsertAfter = touch.clientY > rect.top + rect.height / 2;
+            } else {
+              touchOverRow = null;
+            }
+          }, { passive: false });
+          dragHandle.addEventListener('touchend', (event) => {
+            if (touchDragId !== card.id) return;
+            event.preventDefault();
+            const dropRow = touchOverRow;
+            const insertAfter = touchInsertAfter;
+            clearTouchDrag();
+            if (!dropRow) return;
+            const targetCard = cardById.get(dropRow.dataset.id);
+            if (!targetCard || targetCard === card) return;
+            const sourceIndex = cards.indexOf(card);
+            let targetIndex = cards.indexOf(targetCard) + (insertAfter ? 1 : 0);
+            if (sourceIndex < targetIndex) targetIndex -= 1;
+            moveCardToIndex(card, targetIndex);
+          }, { passive: false });
+          dragHandle.addEventListener('touchcancel', () => {
+            if (touchDragId !== card.id) return;
+            clearTouchDrag();
+          });
 
           const rankNumber = document.createElement('span');
           rankNumber.textContent = String(index + 1);
