@@ -52,8 +52,6 @@
       select, input { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; background: var(--paper); color: var(--ink); font: inherit; }
       select:focus, input:focus, button:focus-visible, a:focus-visible { outline: 3px solid rgb(18 93 82 / 22%); outline-offset: 2px; }
       button { min-height: 44px; border: 1px solid rgb(18 93 82 / 24%); border-radius: 8px; padding: 8px 13px; background: var(--green); color: white; font: inherit; font-weight: 800; cursor: pointer; }
-      .quick-nav { display: flex; gap: 8px; overflow-x: auto; padding: 12px 0 16px; scrollbar-width: thin; }
-      .quick-chip { flex: 0 0 auto; min-height: 36px; border-color: var(--line); background: var(--paper); color: var(--ink); font-size: .88rem; }
       .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 28px; align-items: start; padding: 30px 0 56px; }
       .index-panel { position: sticky; top: 106px; padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: rgb(255 253 248 / 88%); box-shadow: 0 10px 26px rgb(47 36 22 / 8%); }
       .index-panel h2, .section-title { margin: 0; font-size: 1.2rem; line-height: 1.3; }
@@ -195,18 +193,6 @@
           <label>馬名・母・父で絞り込み
             <input id="horseSearch" type="search" placeholder="例: キタサンブラック、アーモンドアイ">
           </label>
-        </div>
-        <div class="quick-nav" aria-label="上位10頭ショートカット">
-          <button class="quick-chip" type="button" data-target="horse-01">01 ジャンゴッド</button>
-<button class="quick-chip" type="button" data-target="horse-02">02 エルドボルグ</button>
-<button class="quick-chip" type="button" data-target="horse-03">03 ソブリオ</button>
-<button class="quick-chip" type="button" data-target="horse-04">04 チェスティーノ</button>
-<button class="quick-chip" type="button" data-target="horse-05">05 ダノンダックス</button>
-<button class="quick-chip" type="button" data-target="horse-06">06 ラガリーガ</button>
-<button class="quick-chip" type="button" data-target="horse-07">07 ジョドレルバンク</button>
-<button class="quick-chip" type="button" data-target="horse-08">08 ダイナマイク</button>
-<button class="quick-chip" type="button" data-target="horse-09">09 ラッキースパークル</button>
-<button class="quick-chip" type="button" data-target="horse-10">10 ノイエルング</button>
         </div>
       </div>
     </div>
@@ -1639,13 +1625,6 @@
         document.getElementById(id)?.scrollIntoView({ block: 'start' });
       });
       search.addEventListener('input', applySearch);
-      document.querySelectorAll('.quick-chip').forEach((button) => {
-        button.addEventListener('click', () => {
-          search.value = '';
-          applySearch();
-          document.getElementById(button.dataset.target)?.scrollIntoView({ block: 'start' });
-        });
-      });
       updateCount();
     </script>
   </body>
