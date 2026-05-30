@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>POG 2026-2027 おすすめ馬 上位50頭</title>
-    <meta name="description" content="POG 2026-2027シーズンのおすすめ馬上位50頭を、父母、基本情報、血統メモ、参考リンクつきでまとめた静的ページです。">
+    <title>POG 2026-2027 おすすめ馬 50頭＋注目1頭</title>
+    <meta name="description" content="POG 2026-2027シーズンのおすすめ馬50頭と注目1頭を、父母、基本情報、血統メモ、参考リンクつきでまとめた静的ページです。">
     <style>
       :root {
         color-scheme: light;
@@ -47,13 +47,11 @@
       .stat strong { display: block; font-size: 2rem; line-height: 1; }
       .stat span { display: block; margin-top: 6px; color: var(--muted); font-size: .86rem; }
       .toolbar-wrap { position: sticky; top: 0; z-index: 10; border-block: 1px solid rgb(221 213 199 / 90%); background: rgb(247 244 236 / 94%); backdrop-filter: blur(10px); }
-      .toolbar { display: grid; grid-template-columns: 1.1fr 1fr auto; gap: 12px; align-items: center; padding: 14px 0; }
+      .toolbar { display: grid; grid-template-columns: minmax(220px, .9fr) minmax(280px, 1.2fr); gap: 12px; align-items: center; padding: 14px 0; }
       label { display: grid; gap: 4px; color: var(--muted); font-size: .78rem; font-weight: 700; }
       select, input { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; background: var(--paper); color: var(--ink); font: inherit; }
       select:focus, input:focus, button:focus-visible, a:focus-visible { outline: 3px solid rgb(18 93 82 / 22%); outline-offset: 2px; }
-      .control-buttons { display: flex; gap: 8px; align-self: end; }
       button { min-height: 44px; border: 1px solid rgb(18 93 82 / 24%); border-radius: 8px; padding: 8px 13px; background: var(--green); color: white; font: inherit; font-weight: 800; cursor: pointer; }
-      button.secondary { background: var(--paper); color: var(--green); }
       .quick-nav { display: flex; gap: 8px; overflow-x: auto; padding: 12px 0 16px; scrollbar-width: thin; }
       .quick-chip { flex: 0 0 auto; min-height: 36px; border-color: var(--line); background: var(--paper); color: var(--ink); font-size: .88rem; }
       .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 28px; align-items: start; padding: 30px 0 56px; }
@@ -100,8 +98,6 @@
         .index-panel { position: static; }
         .table-scroll { max-height: 360px; }
         .toolbar { grid-template-columns: 1fr; }
-        .control-buttons { align-self: stretch; }
-        .control-buttons button { flex: 1; }
       }
       @media (max-width: 640px) {
         .hero { padding-top: 28px; }
@@ -126,12 +122,12 @@
       <div class="hero-grid">
         <div>
           <p class="eyebrow">POG 2026-2027 WATCH LIST</p>
-          <h1>おすすめ馬 上位50頭</h1>
+          <h1>おすすめ馬 50頭＋注目1頭</h1>
           <p class="lead">馬名、母、父、基本情報、血統メモ、参考リンクを1ページで眺められるようにまとめました。写真は表示せず、まずは読み物として追いやすい形にしています。</p>
         </div>
         <div class="stats" aria-label="掲載概要">
-          <div class="stat"><strong>50</strong><span>掲載頭数</span></div>
-          <div class="stat"><strong>39</strong><span>netkeiba個別リンク</span></div>
+          <div class="stat"><strong>51</strong><span>掲載頭数</span></div>
+          <div class="stat"><strong>40</strong><span>netkeiba個別リンク</span></div>
           <div class="stat"><strong>11</strong><span>netkeiba検索リンク</span></div>
           <div class="stat"><strong>1</strong><span>静的HTML</span></div>
         </div>
@@ -193,15 +189,12 @@
 <option value="horse-48">48. ルーメンルーナエ</option>
 <option value="horse-49">49. ベルバーニア</option>
 <option value="horse-50">50. エターナルバラード</option>
+<option value="horse-51">51. スノーウィスパー</option>
             </select>
           </label>
           <label>馬名・母・父で絞り込み
             <input id="horseSearch" type="search" placeholder="例: キタサンブラック、アーモンドアイ">
           </label>
-          <div class="control-buttons">
-            <button type="button" id="topTen">上位10頭</button>
-            <button class="secondary" type="button" id="showAll">全表示</button>
-          </div>
         </div>
         <div class="quick-nav" aria-label="上位10頭ショートカット">
           <button class="quick-chip" type="button" data-target="horse-01">01 ジャンゴッド</button>
@@ -273,13 +266,14 @@
 <tr><td>47</td><td><a href="#horse-47">レッドインサイト</a></td><td>ダンシングラグズ</td><td>エピファネイア</td></tr>
 <tr><td>48</td><td><a href="#horse-48">ルーメンルーナエ</a></td><td>ルリアナ</td><td>エピファネイア</td></tr>
 <tr><td>49</td><td><a href="#horse-49">ベルバーニア</a></td><td>アドマイヤローザ</td><td>キタサンブラック</td></tr>
-<tr><td>50</td><td><a href="#horse-50">エターナルバラード</a></td><td>バラーディスト</td><td>ロードカナロア</td></tr></tbody>
+<tr><td>50</td><td><a href="#horse-50">エターナルバラード</a></td><td>バラーディスト</td><td>ロードカナロア</td></tr>
+<tr><td>51</td><td><a href="#horse-51">スノーウィスパー</a></td><td>ブチコ</td><td>ニューイヤーズデイ</td></tr></tbody>
           </table>
         </div>
       </aside>
       <section aria-labelledby="cards-title">
         <h2 class="section-title" id="cards-title">個別メモ</h2>
-        <p class="lead" id="resultCount">50頭を表示中</p>
+        <p class="lead" id="resultCount">51頭を表示中</p>
         <div class="empty" id="emptyState">該当する馬がありません。</div>
         <div class="cards" id="horseCards">
           
@@ -1582,6 +1576,32 @@
           </section>
           <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106505/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106505" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%A8%E3%82%BF%E3%83%BC%E3%83%8A%E3%83%AB%E3%83%90%E3%83%A9%E3%83%BC%E3%83%89%20%E3%83%90%E3%83%A9%E3%83%BC%E3%83%87%E3%82%A3%E3%82%B9%E3%83%88%20%E3%83%AD%E3%83%BC%E3%83%89%E3%82%AB%E3%83%8A%E3%83%AD%E3%82%A2%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
         </article>
+
+        <article class="horse-card" id="horse-51" data-name="スノーウィスパー" data-dam="ブチコ" data-sire="ニューイヤーズデイ" data-family="シラユキヒメ一族 ソダシ ママコチャ 白毛" data-rank="51">
+          <div class="card-head">
+            <div class="rank-mark">51</div>
+            <div>
+              <p class="bloodline">ブチコ x ニューイヤーズデイ</p>
+              <h3>スノーウィスパー</h3>
+            </div>
+          </div>
+          <div class="fact-grid"><div class="fact"><span>性別</span><strong>牝</strong></div><div class="fact"><span>生年月日</span><strong>2024/02/22 (2歳)</strong></div><div class="fact"><span>毛色</span><strong>白毛</strong></div><div class="fact"><span>厩舎</span><strong>須貝尚介 (栗)</strong></div><div class="fact"><span>生産者</span><strong>ノーザンファーム</strong></div><div class="fact"><span>馬主</span><strong>金子真人ホールディングス</strong></div><div class="fact"><span>馬名由来</span><strong>雪＋囁き</strong></div><div class="fact"><span>人気</span><strong>POG-INFO指名人気 33位 / 指名数 15 / 本賞金 0.0</strong></div></div>
+          <div class="note-grid">
+            <section>
+              <h4>父の特色</h4>
+              <p>父ニューイヤーズデイはStreet Cry系のダート色とスピードを感じさせる種牡馬。母系のスター性と合わせて、芝短距離からダート寄りまで適性の出方を追いたい。</p>
+            </section>
+            <section>
+              <h4>母の特色</h4>
+              <p>母ブチコはシラユキヒメの仔で、ソダシやママコチャを出した白毛一族の中心牝馬。血統表にシラユキヒメが入る、見た目にも物語にも強い一頭。</p>
+            </section>
+          </div>
+          <section class="pog-note">
+            <h4>POG的な楽しみどころ</h4>
+            <p>51番目の追加注目枠。POG-INFOでは指名人気33位に入っており、netkeibaでもソダシ、マルガの妹として函館芝1200mあたりの早期デビュー予定が報じられている。白毛一族の話題性に加えて、早めに動けそうな点まで含めて追いかけたい。</p>
+          </section>
+          <div class="refs" aria-label="参考ページ"><a class="ref-link ref-netkeiba" href="https://db.netkeiba.com/horse/2024106556/" target="_blank" rel="noopener">netkeiba DB</a><a class="ref-link ref-netkeiba" href="https://news.netkeiba.com/?pid=news_view&amp;no=332433" target="_blank" rel="noopener">netkeiba ニュース</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/horseData/show/2024106556" target="_blank" rel="noopener">POG-INFO 個別ページ</a><a class="ref-link ref-poginfo" href="https://poginfo.com/pogs/pogRanking/2026" target="_blank" rel="noopener">POG-INFO 指名馬ランキング</a><a class="ref-link ref-search" href="https://www.google.com/search?q=%E3%82%B9%E3%83%8E%E3%83%BC%E3%82%A6%E3%82%A3%E3%82%B9%E3%83%91%E3%83%BC%20%E3%83%96%E3%83%81%E3%82%B3%20%E3%82%B7%E3%83%A9%E3%83%A6%E3%82%AD%E3%83%92%E3%83%A1%20POG%202026%202027" target="_blank" rel="noopener">追加調査用検索</a></div>
+        </article>
         </div>
       </section>
     </main>
@@ -1606,7 +1626,7 @@
       function applySearch() {
         const query = normalize(search.value);
         cards.forEach((card) => {
-          const haystack = normalize(`${card.dataset.name} ${card.dataset.dam} ${card.dataset.sire}`);
+          const haystack = normalize(`${card.dataset.name} ${card.dataset.dam} ${card.dataset.sire} ${card.dataset.family || ''}`);
           card.hidden = query !== '' && !haystack.includes(query);
         });
         updateCount();
@@ -1619,17 +1639,6 @@
         document.getElementById(id)?.scrollIntoView({ block: 'start' });
       });
       search.addEventListener('input', applySearch);
-      document.getElementById('showAll').addEventListener('click', () => {
-        search.value = '';
-        cards.forEach((card) => { card.hidden = false; });
-        updateCount();
-      });
-      document.getElementById('topTen').addEventListener('click', () => {
-        search.value = '';
-        cards.forEach((card) => { card.hidden = Number(card.dataset.rank) > 10; });
-        updateCount();
-        document.getElementById('cards-title').scrollIntoView({ block: 'start' });
-      });
       document.querySelectorAll('.quick-chip').forEach((button) => {
         button.addEventListener('click', () => {
           search.value = '';
