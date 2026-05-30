@@ -142,6 +142,9 @@
       .horse-card.is-custom .card-head { background: linear-gradient(90deg, rgb(166 111 31 / 12%), transparent 72%); }
       .card-tools { display: flex; gap: 8px; justify-content: flex-end; padding: 14px 22px 18px; border-top: 1px solid var(--line); }
       .card-tools button { min-height: 36px; padding: 5px 14px; font-size: .82rem; }
+      .card-memo-actions { display: flex; gap: 8px; justify-content: flex-end; padding: 10px 22px 14px; border-top: 1px solid var(--line); }
+      .card-memo-actions button { min-height: 34px; padding: 4px 14px; font-size: .82rem; }
+      .card-tools + .card-memo-actions { border-top: none; padding-top: 4px; }
       .danger-button { border-color: rgb(139 47 54 / 28%); color: var(--red); background: var(--red-soft); }
       .custom-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
       .custom-fields label.full { grid-column: 1 / -1; }
@@ -154,6 +157,8 @@
         .cards-head { display: block; }
         .cards-head .add-custom-button { margin-top: 12px; }
         .card-tools button { flex: 1; }
+        .card-memo-actions { padding: 8px 16px 12px; }
+        .card-memo-actions button { flex: initial; min-height: 28px; padding: 3px 10px; font-size: .74rem; }
         .memo-modal { place-items: start center; padding: 12px 12px 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
         .memo-dialog { max-height: none; overflow: visible; margin-bottom: 30vh; }
         .memo-actions { flex-wrap: wrap; }
@@ -2361,6 +2366,43 @@
         saveNotes();
         renderRanking();
         updateDraftStatus();
+        renderCardTools();
+      }
+
+      function renderCardTools() {
+        cards.forEach((card) => {
+          const isTaken = takenIds.has(card.id);
+          const hasSavedNote = hasNote(card.id);
+
+          let tools = card.querySelector('.card-memo-actions');
+          if (!tools) {
+            tools = document.createElement('div');
+            tools.className = 'card-memo-actions';
+
+            const memoBtn = document.createElement('button');
+            memoBtn.type = 'button';
+            memoBtn.addEventListener('click', () => openMemo(card.id));
+
+            const takenBtn = document.createElement('button');
+            takenBtn.type = 'button';
+            takenBtn.textContent = '済';
+            takenBtn.addEventListener('click', () => toggleTaken(card.id));
+
+            tools.append(memoBtn, takenBtn);
+            card.append(tools);
+          }
+
+          const [memoBtn, takenBtn] = tools.querySelectorAll('button');
+
+          memoBtn.className = `memo-button${hasSavedNote ? ' is-saved' : ''}`;
+          memoBtn.textContent = 'メモ';
+          memoBtn.setAttribute('aria-pressed', String(hasSavedNote));
+          memoBtn.setAttribute('aria-label', `${card.dataset.name}のメモを${hasSavedNote ? '編集（保存済み）' : '追加'}`);
+          memoBtn.title = hasSavedNote ? '保存済みメモを編集' : 'メモを書く';
+
+          takenBtn.setAttribute('aria-pressed', String(isTaken));
+          takenBtn.title = isTaken ? '指名済みを解除' : '他の人に取られた馬としてグレーアウト';
+        });
       }
 
       function renderTaken() {
@@ -2369,6 +2411,7 @@
           card.classList.toggle('is-taken', isTaken);
         });
         updateDraftStatus();
+        renderCardTools();
       }
 
       function renderOrder() {
