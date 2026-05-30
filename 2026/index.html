@@ -133,7 +133,28 @@
       .memo-dialog h2 { margin: 0; font-size: 1.35rem; line-height: 1.35; }
       .memo-dialog p { margin: 4px 0 0; color: var(--muted); font-size: .9rem; }
       .memo-close { width: 40px; min-width: 40px; min-height: 40px; padding: 0; border-color: var(--line); color: var(--green); background: var(--paper); }
-      .memo-actions { display: flex; justify-content: flex-end; margin-top: 12px; }
+      .memo-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 12px; }
+      .cards-head { display: flex; gap: 16px; align-items: end; justify-content: space-between; flex-wrap: wrap; margin-bottom: 14px; }
+      .cards-head .lead { margin-top: 6px; }
+      .add-custom-button { border-color: rgb(18 93 82 / 24%); color: white; background: var(--green); white-space: nowrap; }
+      .custom-badge { display: inline-block; margin-top: 6px; padding: 2px 9px; border: 1px solid rgb(166 111 31 / 36%); border-radius: 999px; color: var(--gold); background: rgb(166 111 31 / 10%); font-size: .72rem; font-weight: 800; }
+      .horse-card.is-custom { border-color: rgb(166 111 31 / 32%); }
+      .horse-card.is-custom .card-head { background: linear-gradient(90deg, rgb(166 111 31 / 12%), transparent 72%); }
+      .card-tools { display: flex; gap: 8px; justify-content: flex-end; padding: 14px 22px 18px; border-top: 1px solid var(--line); }
+      .card-tools button { min-height: 36px; padding: 5px 14px; font-size: .82rem; }
+      .danger-button { border-color: rgb(139 47 54 / 28%); color: var(--red); background: var(--red-soft); }
+      .custom-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .custom-fields label.full { grid-column: 1 / -1; }
+      .custom-fields textarea { min-height: 110px; }
+      .form-error { margin: 10px 0 0; color: var(--red); font-size: .84rem; font-weight: 700; }
+      .form-error:empty { display: none; }
+      @media (max-width: 640px) {
+        .custom-fields { grid-template-columns: 1fr; }
+        .add-custom-button { width: 100%; }
+        .cards-head { display: block; }
+        .cards-head .add-custom-button { margin-top: 12px; }
+        .card-tools button { flex: 1; }
+      }
       @media (max-width: 920px) {
         .site { width: min(100% - 28px, 1180px); }
         .hero-grid, .layout { grid-template-columns: 1fr; }
@@ -356,8 +377,13 @@
         </div>
       </aside>
       <section aria-labelledby="cards-title">
-        <h2 class="section-title" id="cards-title">個別メモ</h2>
-        <p class="lead" id="resultCount">51頭を表示中</p>
+        <div class="cards-head">
+          <div>
+            <h2 class="section-title" id="cards-title">個別メモ</h2>
+            <p class="lead" id="resultCount">51頭を表示中</p>
+          </div>
+          <button class="add-custom-button" id="addCustomHorse" type="button">＋ 独自の馬を追加</button>
+        </div>
         <div class="empty" id="emptyState">該当する馬がありません。</div>
         <div class="cards" id="horseCards">
           
@@ -1712,11 +1738,68 @@
         </form>
       </div>
     </div>
+    <div class="memo-modal" id="customModal" role="dialog" aria-modal="true" aria-labelledby="customTitle" hidden>
+      <div class="memo-dialog">
+        <header>
+          <div>
+            <h2 id="customTitle">独自の馬を追加</h2>
+            <p>馬名・母・父は必須です。それ以外は未入力でも保存できます。</p>
+          </div>
+          <button class="memo-close" id="customClose" type="button" aria-label="フォームを閉じる">&times;</button>
+        </header>
+        <form id="customForm">
+          <div class="custom-fields">
+            <label class="full">馬名 <span aria-hidden="true">*</span>
+              <input id="customName" type="text" required maxlength="60" placeholder="例: オリジナルホース">
+            </label>
+            <label>母 <span aria-hidden="true">*</span>
+              <input id="customDam" type="text" required maxlength="60" placeholder="例: アーモンドアイ">
+            </label>
+            <label>父 <span aria-hidden="true">*</span>
+              <input id="customSire" type="text" required maxlength="60" placeholder="例: キタサンブラック">
+            </label>
+            <label>性別
+              <input id="customSex" type="text" maxlength="20" placeholder="例: 牡 / 牝">
+            </label>
+            <label>生年月日
+              <input id="customBirth" type="text" maxlength="40" placeholder="例: 2024/03/15">
+            </label>
+            <label>毛色
+              <input id="customColor" type="text" maxlength="20" placeholder="例: 鹿毛">
+            </label>
+            <label>厩舎
+              <input id="customStable" type="text" maxlength="40" placeholder="例: 友道康夫 (栗)">
+            </label>
+            <label>生産者
+              <input id="customBreeder" type="text" maxlength="60" placeholder="例: ノーザンファーム">
+            </label>
+            <label>馬主
+              <input id="customOwner" type="text" maxlength="60" placeholder="例: サンデーレーシング">
+            </label>
+            <label>馬名由来
+              <input id="customNaming" type="text" maxlength="80" placeholder="例: 由来メモ">
+            </label>
+            <label class="full">参考ページURL
+              <input id="customUrl" type="url" maxlength="300" placeholder="例: https://db.netkeiba.com/horse/...">
+            </label>
+            <label class="full">メモ・特色
+              <textarea id="customNote" maxlength="1000" placeholder="血統の見どころ、注目理由など"></textarea>
+            </label>
+          </div>
+          <p class="form-error" id="customError"></p>
+          <div class="memo-actions">
+            <button type="button" class="danger-button" id="customDelete" hidden>削除</button>
+            <button type="submit" id="customSubmit">追加する</button>
+          </div>
+        </form>
+      </div>
+    </div>
     <script>
       const storageKeys = {
         order: 'pog-2026-draft-order',
         taken: 'pog-2026-draft-taken',
         notes: 'pog-2026-draft-notes',
+        custom: 'pog-2026-custom-horses',
       };
       const cardsContainer = document.getElementById('horseCards');
       const search = document.getElementById('horseSearch');
@@ -1741,10 +1824,39 @@
       const memoForm = document.getElementById('memoForm');
       const memoInput = document.getElementById('horseMemo');
       const memoClose = document.getElementById('memoClose');
+      const addCustomHorse = document.getElementById('addCustomHorse');
+      const customModal = document.getElementById('customModal');
+      const customTitle = document.getElementById('customTitle');
+      const customForm = document.getElementById('customForm');
+      const customClose = document.getElementById('customClose');
+      const customError = document.getElementById('customError');
+      const customSubmit = document.getElementById('customSubmit');
+      const customDelete = document.getElementById('customDelete');
+      const customFieldKeys = ['name', 'dam', 'sire', 'sex', 'birth', 'color', 'stable', 'breeder', 'owner', 'naming', 'url', 'note'];
+      const customInputs = {};
+      customFieldKeys.forEach((key) => {
+        customInputs[key] = document.getElementById('custom' + key.charAt(0).toUpperCase() + key.slice(1));
+      });
+      const customFactFields = [
+        ['sex', '性別'],
+        ['birth', '生年月日'],
+        ['color', '毛色'],
+        ['stable', '厩舎'],
+        ['breeder', '生産者'],
+        ['owner', '馬主'],
+        ['naming', '馬名由来'],
+      ];
+
+      let customHorses = readCustomHorses();
+      customHorses.forEach((horse) => {
+        cardsContainer.append(buildCustomCard(horse));
+      });
+
       const originalCards = Array.from(document.querySelectorAll('.horse-card'));
       const originalIds = originalCards.map((card) => card.id);
       const cardById = new Map(originalCards.map((card) => [card.id, card]));
       let cards = [...originalCards];
+      let editingCustomId = '';
       let takenIds = new Set(readStoredArray(storageKeys.taken));
       let notesById = readStoredObject(storageKeys.notes);
       let activeMemoId = '';
@@ -1795,6 +1907,253 @@
         }
       }
 
+      function makeCustomId() {
+        return `custom-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
+      }
+
+      function normalizeCustomHorse(value, usedIds) {
+        if (!value || typeof value !== 'object') return null;
+        const text = (key, max) => (typeof value[key] === 'string' ? value[key].trim().slice(0, max) : '');
+        const name = text('name', 60);
+        const dam = text('dam', 60);
+        const sire = text('sire', 60);
+        if (!name || !dam || !sire) return null;
+        let id = typeof value.id === 'string' && /^custom-[\w-]+$/.test(value.id) ? value.id : '';
+        if (!id || usedIds.has(id)) id = makeCustomId();
+        usedIds.add(id);
+        return {
+          id,
+          name,
+          dam,
+          sire,
+          sex: text('sex', 20),
+          birth: text('birth', 40),
+          color: text('color', 20),
+          stable: text('stable', 40),
+          breeder: text('breeder', 60),
+          owner: text('owner', 60),
+          naming: text('naming', 80),
+          url: text('url', 300),
+          note: text('note', 1000),
+        };
+      }
+
+      function readCustomHorses() {
+        const raw = readStoredArray(storageKeys.custom);
+        const usedIds = new Set();
+        return raw.map((entry) => normalizeCustomHorse(entry, usedIds)).filter(Boolean);
+      }
+
+      function saveCustomHorses() {
+        writeStoredArray(storageKeys.custom, customHorses);
+      }
+
+      function buildCustomCard(horse) {
+        const article = document.createElement('article');
+        article.className = 'horse-card is-custom';
+        article.id = horse.id;
+        article.dataset.name = horse.name;
+        article.dataset.dam = horse.dam;
+        article.dataset.sire = horse.sire;
+        article.dataset.custom = 'true';
+
+        const head = document.createElement('div');
+        head.className = 'card-head';
+        const rankMark = document.createElement('div');
+        rankMark.className = 'rank-mark';
+        rankMark.textContent = '00';
+        const headBody = document.createElement('div');
+        const bloodline = document.createElement('p');
+        bloodline.className = 'bloodline';
+        bloodline.textContent = `${horse.dam} x ${horse.sire}`;
+        const heading = document.createElement('h3');
+        heading.textContent = horse.name;
+        const badge = document.createElement('span');
+        badge.className = 'custom-badge';
+        badge.textContent = '独自の馬';
+        headBody.append(bloodline, heading, badge);
+        head.append(rankMark, headBody);
+        article.append(head);
+
+        const facts = customFactFields.filter(([key]) => horse[key]);
+        if (facts.length) {
+          const factGrid = document.createElement('div');
+          factGrid.className = 'fact-grid';
+          facts.forEach(([key, label]) => {
+            const fact = document.createElement('div');
+            fact.className = 'fact';
+            const span = document.createElement('span');
+            span.textContent = label;
+            const strong = document.createElement('strong');
+            strong.textContent = horse[key];
+            fact.append(span, strong);
+            factGrid.append(fact);
+          });
+          article.append(factGrid);
+        }
+
+        if (horse.note) {
+          const note = document.createElement('section');
+          note.className = 'pog-note';
+          const h4 = document.createElement('h4');
+          h4.textContent = 'メモ・特色';
+          const p = document.createElement('p');
+          p.textContent = horse.note;
+          note.append(h4, p);
+          article.append(note);
+        }
+
+        const refs = document.createElement('div');
+        refs.className = 'refs';
+        refs.setAttribute('aria-label', '参考ページ');
+        if (horse.url) {
+          const link = document.createElement('a');
+          link.className = 'ref-link ref-netkeiba';
+          link.href = horse.url;
+          link.target = '_blank';
+          link.rel = 'noopener';
+          link.textContent = '参考ページ';
+          refs.append(link);
+        }
+        const searchLink = document.createElement('a');
+        searchLink.className = 'ref-link ref-search';
+        searchLink.href = `https://www.google.com/search?q=${encodeURIComponent(`${horse.name} ${horse.dam} ${horse.sire} POG 2026 2027`)}`;
+        searchLink.target = '_blank';
+        searchLink.rel = 'noopener';
+        searchLink.textContent = '追加調査用検索';
+        refs.append(searchLink);
+        article.append(refs);
+
+        const tools = document.createElement('div');
+        tools.className = 'card-tools';
+        const editButton = document.createElement('button');
+        editButton.type = 'button';
+        editButton.className = 'ghost-button';
+        editButton.textContent = '編集';
+        editButton.addEventListener('click', () => openCustomModal(horse.id));
+        const deleteButton = document.createElement('button');
+        deleteButton.type = 'button';
+        deleteButton.className = 'danger-button';
+        deleteButton.textContent = '削除';
+        deleteButton.addEventListener('click', () => deleteCustomHorse(horse.id));
+        tools.append(editButton, deleteButton);
+        article.append(tools);
+
+        return article;
+      }
+
+      function registerCustomCard(horse) {
+        const element = buildCustomCard(horse);
+        cardsContainer.append(element);
+        cardById.set(horse.id, element);
+        originalIds.push(horse.id);
+        originalCards.push(element);
+        cards.push(element);
+        return element;
+      }
+
+      function unregisterCustomCard(id) {
+        const element = cardById.get(id);
+        if (element) element.remove();
+        cardById.delete(id);
+        const removeFrom = (list) => {
+          const index = list.indexOf(id);
+          if (index >= 0) list.splice(index, 1);
+        };
+        removeFrom(originalIds);
+        let idx = originalCards.findIndex((card) => card.id === id);
+        if (idx >= 0) originalCards.splice(idx, 1);
+        idx = cards.findIndex((card) => card.id === id);
+        if (idx >= 0) cards.splice(idx, 1);
+        takenIds.delete(id);
+        delete notesById[id];
+      }
+
+      function syncCustomHorses(list) {
+        [...customHorses].forEach((horse) => unregisterCustomCard(horse.id));
+        const usedIds = new Set();
+        customHorses = (Array.isArray(list) ? list : [])
+          .map((entry) => normalizeCustomHorse(entry, usedIds))
+          .filter(Boolean);
+        customHorses.forEach((horse) => registerCustomCard(horse));
+        saveCustomHorses();
+        saveTaken();
+        saveNotes();
+      }
+
+      function readCustomForm() {
+        const result = {};
+        customFieldKeys.forEach((key) => {
+          result[key] = customInputs[key].value.trim();
+        });
+        return result;
+      }
+
+      function openCustomModal(id) {
+        editingCustomId = id || '';
+        customError.textContent = '';
+        const horse = id ? customHorses.find((item) => item.id === id) : null;
+        customFieldKeys.forEach((key) => {
+          customInputs[key].value = horse ? horse[key] || '' : '';
+        });
+        customTitle.textContent = horse ? '独自の馬を編集' : '独自の馬を追加';
+        customSubmit.textContent = horse ? '更新する' : '追加する';
+        customDelete.hidden = !horse;
+        customModal.hidden = false;
+        document.body.classList.add('modal-open');
+        customInputs.name.focus();
+      }
+
+      function closeCustomModal() {
+        editingCustomId = '';
+        customModal.hidden = true;
+        document.body.classList.remove('modal-open');
+      }
+
+      function submitCustomForm() {
+        const values = readCustomForm();
+        if (!values.name || !values.dam || !values.sire) {
+          customError.textContent = '馬名・母・父は必須です。';
+          return;
+        }
+        const usedIds = new Set(customHorses.filter((h) => h.id !== editingCustomId).map((h) => h.id));
+        if (editingCustomId) {
+          const horse = normalizeCustomHorse({ ...values, id: editingCustomId }, usedIds);
+          customHorses = customHorses.map((item) => (item.id === editingCustomId ? horse : item));
+          const oldElement = cardById.get(editingCustomId);
+          const newElement = buildCustomCard(horse);
+          cardById.set(horse.id, newElement);
+          const replaceIn = (list) => {
+            const index = list.indexOf(oldElement);
+            if (index >= 0) list[index] = newElement;
+          };
+          replaceIn(originalCards);
+          replaceIn(cards);
+          if (oldElement) oldElement.replaceWith(newElement);
+        } else {
+          const horse = normalizeCustomHorse(values, usedIds);
+          customHorses.push(horse);
+          registerCustomCard(horse);
+        }
+        saveCustomHorses();
+        saveOrder();
+        renderOrder();
+        closeCustomModal();
+      }
+
+      function deleteCustomHorse(id) {
+        const horse = customHorses.find((item) => item.id === id);
+        if (!horse) return;
+        if (!window.confirm(`「${horse.name}」を削除しますか？`)) return;
+        customHorses = customHorses.filter((item) => item.id !== id);
+        unregisterCustomCard(id);
+        saveCustomHorses();
+        saveOrder();
+        saveTaken();
+        saveNotes();
+        renderOrder();
+      }
+
       function normalize(value) {
         return value.toLocaleLowerCase('ja-JP').replace(/\s+/g, '');
       }
@@ -1830,7 +2189,7 @@
       }
 
       function updateDraftStatus() {
-        draftStatus.textContent = `指名済み ${takenIds.size}頭 / メモ ${noteCount()}頭 / 並び順・指名済み・メモはこの端末に保存されます`;
+        draftStatus.textContent = `指名済み ${takenIds.size}頭 / メモ ${noteCount()}頭 / 独自 ${customHorses.length}頭 / 並び順・指名済み・メモ・独自馬はこの端末に保存されます`;
       }
 
       function openRankingMenu() {
@@ -1856,7 +2215,7 @@
       function createDraftState() {
         return {
           type: 'pog-articles-draft-state',
-          version: 1,
+          version: 2,
           year: 2026,
           exportedAt: new Date().toISOString(),
           order: cards.map((card) => card.id),
@@ -1864,6 +2223,7 @@
           notes: Object.fromEntries(
             Object.entries(notesById).filter(([id, value]) => cardById.has(id) && typeof value === 'string' && value.trim() !== ''),
           ),
+          custom: customHorses,
         };
       }
 
@@ -1871,6 +2231,7 @@
         if (!value || value.type !== 'pog-articles-draft-state' || value.year !== 2026) {
           throw new Error('2026年POG用のJSONではありません');
         }
+        syncCustomHorses(value.custom);
         const savedIds = Array.isArray(value.order) ? value.order.filter((id) => cardById.has(id)) : [];
         const uniqueOrderIds = [...new Set(savedIds)];
         const missingIds = originalIds.filter((id) => !uniqueOrderIds.includes(id));
@@ -2246,8 +2607,22 @@
       memoModal.addEventListener('click', (event) => {
         if (event.target === memoModal) closeMemo();
       });
+      addCustomHorse.addEventListener('click', () => openCustomModal(''));
+      customForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        submitCustomForm();
+      });
+      customClose.addEventListener('click', closeCustomModal);
+      customDelete.addEventListener('click', () => {
+        if (editingCustomId) deleteCustomHorse(editingCustomId);
+        closeCustomModal();
+      });
+      customModal.addEventListener('click', (event) => {
+        if (event.target === customModal) closeCustomModal();
+      });
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && !memoModal.hidden) closeMemo();
+        if (event.key === 'Escape' && !customModal.hidden) closeCustomModal();
         if (event.key === 'Escape' && rankingPanel.classList.contains('is-open')) closeRankingMenu();
       });
 
