@@ -311,10 +311,6 @@
           </label>
           <div class="draft-tools" aria-label="ドラフト用保存操作">
             <span id="draftStatus">並び順・指名済み・メモはこの端末に保存されます</span>
-            <div class="draft-tool-buttons">
-              <button class="ghost-button" id="resetOrder" type="button">並び順を戻す</button>
-              <button class="ghost-button" id="clearTaken" type="button">指名済みを解除</button>
-            </div>
           </div>
         </div>
       </div>
@@ -1825,8 +1821,6 @@
       const rankingPanel = document.getElementById('rankingPanel');
       const rankingBody = document.getElementById('rankingBody');
       const draftStatus = document.getElementById('draftStatus');
-      const resetOrder = document.getElementById('resetOrder');
-      const clearTaken = document.getElementById('clearTaken');
       const exportState = document.getElementById('exportState');
       const importState = document.getElementById('importState');
       const stateFile = document.getElementById('stateFile');
@@ -2641,20 +2635,6 @@
         document.getElementById(id)?.scrollIntoView({ block: 'start' });
       });
       search.addEventListener('input', applySearch);
-      resetOrder.addEventListener('click', () => {
-        cards = [...originalCards];
-        removeStoredItem(storageKeys.order);
-        renderOrder();
-        showStateStatus('');
-      });
-      clearTaken.addEventListener('click', () => {
-        takenIds = new Set();
-        removeStoredItem(storageKeys.taken);
-        renderTaken();
-        renderRanking();
-        updateCount();
-        showStateStatus('');
-      });
       menuOpen.addEventListener('click', openRankingMenu);
       menuClose.addEventListener('click', closeRankingMenu);
       menuBackdrop.addEventListener('click', closeRankingMenu);
